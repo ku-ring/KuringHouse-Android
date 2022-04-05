@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/welcome_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/notosanskr_bold"
+        android:text="@string/on_boarding_welcome"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/login_email_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/welcome_tv"
+        android:autofillHints="no"
+        android:background="@drawable/edittext_green"
+        android:elevation="2dp"
+        android:fontFamily="@font/sfpro_display_regular"
+        android:hint="@string/login_email"
+        android:inputType="textEmailAddress"
+        android:maxLines="1"
+        android:paddingStart="20dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="10dp"
+        android:textColor="@color/kus_primary"
+        android:textColorHint="@color/kus_secondary_gray"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/login_invitation_code_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/login_email_et"
+        android:autofillHints="no"
+        android:background="@drawable/edittext_green"
+        android:elevation="2dp"
+        android:fontFamily="@font/sfpro_display_regular"
+        android:hint="@string/login_email"
+        android:inputType="textEmailAddress"
+        android:maxLines="1"
+        android:paddingStart="20dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="10dp"
+        android:textColor="@color/kus_primary"
+        android:textColorHint="@color/kus_secondary_gray"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/login_authorize_bt"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginBottom="60dp"
+        android:background="@drawable/button_green_radius32"
+        android:fontFamily="@font/sfpro_display_regular"
+        android:gravity="center"
+        android:text="@string/login_authorize"
+        android:textColor="@color/kus_background"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
