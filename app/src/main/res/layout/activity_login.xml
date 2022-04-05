@@ -54,7 +54,7 @@
         android:background="@drawable/edittext_green"
         android:elevation="2dp"
         android:fontFamily="@font/sfpro_display_regular"
-        android:hint="@string/login_email"
+        android:hint="@string/login_invitation_code"
         android:inputType="textEmailAddress"
         android:maxLines="1"
         android:paddingStart="20dp"

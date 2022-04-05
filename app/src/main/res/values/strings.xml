@@ -9,4 +9,5 @@
     <!--  Login  -->
     <string name="login_authorize">인증하기</string>
     <string name="login_email">이메일을 입력해주세요.</string>
+    <string name="login_invitation_code">초대 코드를 입력해주세요.</string>
 </resources>
