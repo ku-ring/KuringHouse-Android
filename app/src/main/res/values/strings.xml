@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">KuringHouse</string>
+
+    <!--  OnBoarding  -->
+    <string name="on_boarding_welcome">🎉 환영합니다!</string>
+    <string name="on_boarding_introduction">쿠링하우스는 쿠링팀의 회의 및 즐거운 팀 활동을 위한 앱입니다. 정기 회의 뿐만 아니라 급하게 회의를 해야하는 경우 쿠링하우스에서 빠르게 회의 요청을 하세요. 팀원 전체에게, 혹은 특정 팀원에게만 회의 요청을 하실 수 있습니다. 하지만! 회의만 참여하지 마시고 오늘은 한 번 멤버들과 재밌게 소통해보세요! 너무 재밌어서 시간 가는 줄도 모를 걸요? 때로는 진솔한 얘기도 나눠보세요. \n\n\n 쿠링하우스는 오직 쿠링팀에서 초대받은 모든 사람들이 이용할 수 있습니다. 만약 쿠링팀의 멤버인데 앱 사용이 어활성화되지 않은 경우 관리자에게 요청해주세요. 빠르게 초대코드를 전송해 드리겠습니다.</string>
+    <string name="on_boarding_enter_invitation">초대코드 입력하기</string>
 </resources>

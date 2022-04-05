@@ -7,4 +7,18 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="kus_background">#ffffff</color>
+    <color name="kus_green">#3dbd80</color>
+    <color name="kus_green_50">#803dbd80</color>
+    <color name="kus_secondary_green">#c6ecda</color>
+    <color name="kus_gray">#535b5d</color>
+    <color name="kus_secondary_gray">#b6b6b6</color>
+    <color name="kus_gray_line">#DADADA</color>
+    <color name="kus_pink">#e45b78</color>
+
+    <color name="kus_primary">#FF000000</color>
+    <color name="kus_secondary">#535b5d</color>
+    <color name="kus_tertiary">#ababab</color>
+    <color name="kus_label_green">#036b3f</color>
 </resources>
