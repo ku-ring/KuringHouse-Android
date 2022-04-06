@@ -1,10 +1,15 @@
 package com.yeonkyu.kuringhouse.presentation.login
 
+import android.content.Intent
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import com.sendbird.calls.AuthenticateParams
 import com.sendbird.calls.SendBirdCall
+import com.yeonkyu.kuringhouse.R
 import com.yeonkyu.kuringhouse.databinding.ActivityLoginBinding
+import com.yeonkyu.kuringhouse.presentation.preview.PreviewActivity
 import com.yeonkyu.kuringhouse.util.makeDialog
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -13,11 +18,12 @@ import timber.log.Timber
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
+    private val viewModel by viewModels<LoginViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityLoginBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+
+        setupBinding()
 
         binding.loginAuthorizeBt.setOnClickListener {
             val email = binding.loginEmailEt.text.toString()
@@ -37,12 +43,25 @@ class LoginActivity : AppCompatActivity() {
             SendBirdCall.authenticate(params = params) { user, e ->
                 if (e == null) {
                     Timber.e("SB auth success. id : ${user?.userId}")
+                    viewModel.saveUser(email, accessToken)
+                    startPreviewActivity()
                 } else {
                     Timber.e("SB auth fail : [${e.code}] ${e.message}")
                     makeDialog("로그인 실패", e.message)
                 }
             }
         }
+    }
+
+    private fun setupBinding() {
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
+        binding.lifecycleOwner = this
+        binding.viewModel = viewModel
+    }
+
+    private fun startPreviewActivity() {
+        val intent = Intent(this, PreviewActivity::class.java)
+        startActivity(intent)
     }
 
     override fun onBackPressed() {
