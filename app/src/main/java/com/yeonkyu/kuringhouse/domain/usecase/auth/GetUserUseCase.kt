@@ -7,7 +7,6 @@ import javax.inject.Inject
 class GetUserUseCase @Inject constructor(
     private val repository: LoginRepository
 ) {
-
     fun execute(
         onSuccess: (User) -> Unit
     ) {

@@ -4,11 +4,14 @@ import com.yeonkyu.kuringhouse.domain.model.User
 import com.yeonkyu.kuringhouse.domain.repository.LoginRepository
 import javax.inject.Inject
 
-class UpdateUserUseCase @Inject constructor(
+class AuthorizeUseCase @Inject constructor(
     private val repository: LoginRepository
 ) {
-    fun execute(id: String, accessToken: String) {
-        val user = User(id, accessToken)
-        repository.updateUser(user)
+    fun execute(
+        user: User,
+        onSuccess: () -> Unit,
+        onError: (errorCode: String, errorMessage: String) -> Unit
+    ) {
+        repository.authorize(user, onSuccess, onError)
     }
 }
