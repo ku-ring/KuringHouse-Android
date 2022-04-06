@@ -5,15 +5,22 @@ plugins {
     id 'dagger.hilt.android.plugin'
 }
 
+def localPropertiesFile = rootProject.file("local.properties")
+
 android {
-    compileSdk 32
+    compileSdk 30
 
     defaultConfig {
         applicationId "com.yeonkyu.kuringhouse"
         minSdk 23
-        targetSdk 32
+        targetSdk 30
         versionCode 1
         versionName "1.0"
+
+        def localProperties = new Properties()
+        localProperties.load(new FileInputStream(localPropertiesFile))
+
+        buildConfigField "String", "SENDBIRD_APP_ID", localProperties['SENDBIRD_APP_ID']
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -59,5 +66,11 @@ dependencies {
     kaptAndroidTest 'com.google.dagger:hilt-compiler:2.39'
     testImplementation 'com.google.dagger:hilt-android-testing:2.39'
     kaptTest 'com.google.dagger:hilt-compiler:2.39'
+
+    // sendbird sdk
+    implementation 'com.sendbird.sdk:sendbird-calls:1.8.0'
+
+    // Timber
+    implementation 'com.jakewharton.timber:timber:4.7.1'
 
 }

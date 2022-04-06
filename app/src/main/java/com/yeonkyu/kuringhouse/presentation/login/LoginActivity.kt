@@ -2,8 +2,12 @@ package com.yeonkyu.kuringhouse.presentation.login
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.sendbird.calls.AuthenticateParams
+import com.sendbird.calls.SendBirdCall
 import com.yeonkyu.kuringhouse.databinding.ActivityLoginBinding
+import com.yeonkyu.kuringhouse.util.makeDialog
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
@@ -15,6 +19,30 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.loginAuthorizeBt.setOnClickListener {
+            val email = binding.loginEmailEt.text.toString()
+            val accessToken = binding.loginInvitationCodeEt.text.toString()
+            val params = AuthenticateParams(userId = email)
+                .setAccessToken(accessToken = accessToken)
+
+            if(email.isEmpty()) {
+                makeDialog("이메일을 입력해주세요")
+                return@setOnClickListener
+            }
+            if (accessToken.isEmpty()) {
+                makeDialog("초대 코드를 입력해주세요")
+                return@setOnClickListener
+            }
+
+            SendBirdCall.authenticate(params = params) { user, e ->
+                if (e == null) {
+                    Timber.e("SB auth success. id : ${user?.userId}")
+                } else {
+                    Timber.e("SB auth fail : [${e.code}] ${e.message}")
+                    makeDialog("로그인 실패", e.message)
+                }
+            }
+        }
     }
 
     override fun onBackPressed() {
