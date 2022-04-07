@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">KuringHouse</string>
 
-<!--  Common  -->
+    <!--  Common  -->
     <string name="dialog_confirm">확인</string>
+    <string name="kuring_house_title">🏠 쿠링하우스</string>
 
     <!--  OnBoarding  -->
     <string name="on_boarding_welcome">🎉 환영합니다!</string>
@@ -13,4 +14,9 @@
     <string name="login_authorize">인증하기</string>
     <string name="login_email">이메일을 입력해주세요.</string>
     <string name="login_invitation_code">초대 코드를 입력해주세요.</string>
+
+    <!--  Room  -->
+    <string name="create_room_start">새 방 시작하기</string>
+    <string name="create_room_name">방 제목을 입력해주세요</string>
+    <string name="create_room">방 만들기</string>
 </resources>
