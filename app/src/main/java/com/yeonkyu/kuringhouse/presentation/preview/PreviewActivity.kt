@@ -1,17 +1,17 @@
 package com.yeonkyu.kuringhouse.presentation.preview
 
 import android.os.Bundle
+import android.widget.LinearLayout
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.sendbird.calls.*
-import com.sendbird.calls.handler.RoomListQueryResultHandler
 import com.yeonkyu.kuringhouse.R
 import com.yeonkyu.kuringhouse.databinding.ActivityPreviewBinding
 import com.yeonkyu.kuringhouse.presentation.preview.bottomsheet.CreateRoomBottomSheet
 import com.yeonkyu.kuringhouse.util.RecyclerViewPager
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 @AndroidEntryPoint
 class PreviewActivity : AppCompatActivity() {
@@ -68,6 +68,9 @@ class PreviewActivity : AppCompatActivity() {
                 loadNext = { viewModel.getRoomList() },
                 isEnd = { viewModel.isEnd.value == true }
             )
+
+            val dividerItemDecoration = DividerItemDecoration(this@PreviewActivity, LinearLayout.VERTICAL)
+            addItemDecoration(dividerItemDecoration)
         }
     }
 
