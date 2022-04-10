@@ -13,16 +13,26 @@ class PreviewViewModel @Inject constructor(
     private val getRoomUseCase: GetRoomUseCase
 ) : ViewModel() {
 
-    private val _roomList = ArrayList<Room>()
+    val isLoading = MutableLiveData<Boolean>(false)
+    val isEnd = MutableLiveData<Boolean>(false)
+
     val roomList = MutableLiveData<List<Room>>()
 
+    init {
+        getRoomList()
+    }
+
     fun getRoomList() {
+        isLoading.postValue(true)
         getRoomUseCase.execute(
             onSuccess = {
-                _roomList.addAll(it)
-                roomList.postValue(_roomList)
+                roomList.postValue(it)
+                isLoading.postValue(false)
             }, onError = { code, message ->
                 Timber.e("getRoomList error [$code] : $message")
+                isLoading.postValue(false)
+            }, isEnd = {
+                isEnd.value = true
             }
         )
     }

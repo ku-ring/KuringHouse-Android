@@ -7,16 +7,23 @@ import javax.inject.Inject
 class RoomClient @Inject constructor(
     private val call: SendBirdCall
 ) {
+
+    private val params = RoomListQuery.Params()
+        .setType(RoomType.LARGE_ROOM_FOR_AUDIO_ONLY)
+        .setLimit(10)
+        .setState(RoomState.OPEN)
+
+    private var query = call.createRoomListQuery(params)
+
     fun retrieveRoomList(
         onSuccess: (List<Room>) -> Unit,
-        onError: (code: String, message: String) -> Unit
+        onError: (code: String, message: String) -> Unit,
+        isEnd: () -> Unit
     ) {
-        val params = RoomListQuery.Params()
-            .setType(RoomType.LARGE_ROOM_FOR_AUDIO_ONLY)
-            .setLimit(20)
-            .setState(RoomState.OPEN)
+        if (!query.hasNext()) {
+            isEnd()
+        }
 
-        val query = call.createRoomListQuery(params)
         query.next(object : RoomListQueryResultHandler {
             override fun onResult(rooms: List<Room>, e: SendBirdException?) {
                 if (e != null) {
@@ -26,6 +33,9 @@ class RoomClient @Inject constructor(
                 onSuccess(rooms)
             }
         })
+    }
 
+    fun refreshRoomList() {
+        query = call.createRoomListQuery(params)
     }
 }

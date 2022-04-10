@@ -9,6 +9,7 @@ import com.sendbird.calls.handler.RoomListQueryResultHandler
 import com.yeonkyu.kuringhouse.R
 import com.yeonkyu.kuringhouse.databinding.ActivityPreviewBinding
 import com.yeonkyu.kuringhouse.presentation.preview.bottomsheet.CreateRoomBottomSheet
+import com.yeonkyu.kuringhouse.util.RecyclerViewPager
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -17,7 +18,9 @@ class PreviewActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityPreviewBinding
     private val viewModel by viewModels<PreviewViewModel>()
+
     private lateinit var roomAdapter: RoomAdapter
+    private lateinit var pager: RecyclerViewPager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,8 +29,6 @@ class PreviewActivity : AppCompatActivity() {
         setupView()
         setupListAdapter()
         observeData()
-
-        viewModel.getRoomList()
     }
 
     private fun setupBinding() {
@@ -54,6 +55,12 @@ class PreviewActivity : AppCompatActivity() {
 
         binding.previewRecyclerview.apply {
             adapter = roomAdapter
+            pager = RecyclerViewPager(
+                recyclerView = this,
+                isLoading = { viewModel.isLoading.value == true },
+                loadNext = { viewModel.getRoomList() },
+                isEnd = { viewModel.isEnd.value == true }
+            )
         }
     }
 

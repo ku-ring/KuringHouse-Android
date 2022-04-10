@@ -9,8 +9,9 @@ class GetRoomUseCase @Inject constructor(
 ) {
     fun execute(
         onSuccess: (List<Room>) -> Unit,
-        onError: (code: String, message: String) -> Unit
+        onError: (code: String, message: String) -> Unit,
+        isEnd: () -> Unit
     ) {
-        repository.getRoomList(onSuccess, onError)
+        repository.getRoomList(onSuccess, onError, isEnd)
     }
 }
