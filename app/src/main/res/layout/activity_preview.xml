@@ -3,6 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <variable
+            name="viewModel"
+            type="com.yeonkyu.kuringhouse.presentation.preview.PreviewViewModel" />
 
     </data>
 
@@ -27,13 +30,23 @@
             android:id="@+id/preview_create_room_bt"
             android:layout_width="48dp"
             android:layout_height="48dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@null"
+            android:src="@drawable/ic_add_room"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:tint="@color/kus_green" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/preview_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            android:layout_marginEnd="20dp"
-            app:tint="@color/kus_green"
-            android:background="@null"
-            android:src="@drawable/ic_add_room" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/preview_title_tv" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

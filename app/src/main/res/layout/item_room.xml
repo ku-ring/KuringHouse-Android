@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="roomInfo"
+            type="com.yeonkyu.kuringhouse.domain.model.Room" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
+
+        <TextView
+            android:id="@+id/room_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/notosanskr_bold"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:text="@{roomInfo.title}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="쿠링하우스 로비" />
+
+        <ImageView
+            android:id="@+id/room_people_iv"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_person"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/room_title"
+            app:tint="@color/kus_gray" />
+
+        <TextView
+            android:id="@+id/room_people_count_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/notosanskr_regular"
+            android:textColor="@color/kus_gray"
+            android:textSize="12sp"
+            android:text="@{roomInfo.participants}"
+            app:layout_constraintBottom_toBottomOf="@id/room_people_iv"
+            app:layout_constraintStart_toEndOf="@+id/room_people_iv"
+            app:layout_constraintTop_toTopOf="@+id/room_people_iv"
+            tools:text="2" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

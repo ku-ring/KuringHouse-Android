@@ -2,6 +2,7 @@ package com.yeonkyu.kuringhouse.di
 
 import com.sendbird.calls.SendBirdCall
 import com.yeonkyu.kuringhouse.data.source.remote.AuthClient
+import com.yeonkyu.kuringhouse.data.source.remote.RoomClient
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,5 +17,11 @@ object NetworkModule {
     @Singleton
     fun provideAuthClient(call: SendBirdCall): AuthClient {
         return AuthClient(call)
+    }
+
+    @Provides
+    @Singleton
+    fun provideRoomClient(call: SendBirdCall): RoomClient {
+        return RoomClient(call)
     }
 }
