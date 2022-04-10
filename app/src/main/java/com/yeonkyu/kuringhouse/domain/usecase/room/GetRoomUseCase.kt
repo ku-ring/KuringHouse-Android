@@ -14,4 +14,8 @@ class GetRoomUseCase @Inject constructor(
     ) {
         repository.getRoomList(onSuccess, onError, isEnd)
     }
+
+    fun refresh() {
+        repository.refreshRoomList()
+    }
 }

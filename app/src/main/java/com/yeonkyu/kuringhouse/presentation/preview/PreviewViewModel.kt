@@ -36,4 +36,8 @@ class PreviewViewModel @Inject constructor(
             }
         )
     }
+
+    fun refreshRoomList() {
+        getRoomUseCase.refresh()
+    }
 }

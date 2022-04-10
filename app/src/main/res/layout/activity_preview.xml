@@ -39,15 +39,21 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:tint="@color/kus_green" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/preview_recyclerview"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/preview_swipe_refresh"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/preview_title_tv" />
+            app:layout_constraintTop_toBottomOf="@+id/preview_title_tv">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/preview_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         <ProgressBar
             visibleIf="@{viewModel.isLoading()}"
@@ -58,6 +64,5 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

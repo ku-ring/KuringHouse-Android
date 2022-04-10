@@ -44,6 +44,13 @@ class PreviewActivity : AppCompatActivity() {
             val bottomSheet = CreateRoomBottomSheet()
             bottomSheet.show(supportFragmentManager, bottomSheet.tag)
         }
+
+        binding.previewSwipeRefresh.setOnRefreshListener {
+            pager.resetPage()
+            viewModel.refreshRoomList()
+            viewModel.isEnd.value = false
+            viewModel.getRoomList()
+        }
     }
 
     private fun setupListAdapter() {
@@ -67,6 +74,7 @@ class PreviewActivity : AppCompatActivity() {
     private fun observeData() {
         viewModel.roomList.observe(this) {
             roomAdapter.submitList(it)
+            binding.previewSwipeRefresh.isRefreshing = false
         }
     }
 }

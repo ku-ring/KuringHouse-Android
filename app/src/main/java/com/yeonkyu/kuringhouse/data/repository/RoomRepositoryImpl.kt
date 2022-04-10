@@ -32,4 +32,9 @@ class RoomRepositoryImpl(
             }
         )
     }
+
+    override fun refreshRoomList() {
+        roomList.clear()
+        roomClient.refreshRoomList()
+    }
 }

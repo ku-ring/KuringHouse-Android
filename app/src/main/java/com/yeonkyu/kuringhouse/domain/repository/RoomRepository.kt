@@ -8,4 +8,6 @@ interface RoomRepository {
         onError: (errorCode: String, errorMessage: String) -> Unit,
         isEnd: () -> Unit
     )
+
+    fun refreshRoomList()
 }
