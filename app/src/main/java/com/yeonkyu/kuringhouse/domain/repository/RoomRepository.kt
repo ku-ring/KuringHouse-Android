@@ -22,4 +22,10 @@ interface RoomRepository {
         onSuccess: (Room) -> Unit,
         onError: (code: String, message: String) -> Unit
     )
+
+    fun enterRoom(
+        roomId: String,
+        onSuccess: () -> Unit,
+        onError: (code: String, message: String) -> Unit
+    )
 }

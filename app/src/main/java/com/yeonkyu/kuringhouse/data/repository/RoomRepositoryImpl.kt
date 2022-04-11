@@ -71,4 +71,18 @@ class RoomRepositoryImpl(
                 onError(code, message)
             })
     }
+
+    override fun enterRoom(
+        roomId: String,
+        onSuccess: () -> Unit,
+        onError: (code: String, message: String) -> Unit
+    ) {
+        roomClient.enterRoom(
+            roomId = roomId,
+            onSuccess = {
+                onSuccess()
+            }, onError = { code, message ->
+                onError(code, message)
+            })
+    }
 }

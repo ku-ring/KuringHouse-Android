@@ -66,4 +66,26 @@ class RoomClient @Inject constructor(
             }
         }
     }
+
+    fun enterRoom(
+        roomId: String,
+        onSuccess: () -> Unit,
+        onError: (code: String, message: String) -> Unit
+    ) {
+        val room = call.getCachedRoomById(roomId)
+
+        room?.run {
+            val enterParams = EnterParams()
+                .setAudioEnabled(false)
+                .setVideoEnabled(false)
+
+            enter(enterParams) { e ->
+                if (e != null) {
+                    onError(e.code.toString(), e.message ?: "")
+                } else {
+                    onSuccess()
+                }
+            }
+        }
+    }
 }

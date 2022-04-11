@@ -27,7 +27,6 @@ class RecyclerViewPager(
             return
         }
         if (isEnd()) {
-            Timber.e("isEnd")
             return
         }
 
