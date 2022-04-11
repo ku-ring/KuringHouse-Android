@@ -72,9 +72,14 @@ class RoomClient @Inject constructor(
         onSuccess: () -> Unit,
         onError: (code: String, message: String) -> Unit
     ) {
-        val room = call.getCachedRoomById(roomId)
+        call.getCachedRoomById(roomId)?.run {
+            for (participant in participants) {
+                if (participant.user.userId == call.currentUser?.userId) {
+                    onSuccess()
+                    return@run
+                }
+            }
 
-        room?.run {
             val enterParams = EnterParams()
                 .setAudioEnabled(false)
                 .setVideoEnabled(false)
@@ -86,6 +91,12 @@ class RoomClient @Inject constructor(
                     onSuccess()
                 }
             }
+        }
+    }
+
+    fun isIn(roomId: String) {
+        call.getCachedRoomById(roomId)?.run {
+            this.participants
         }
     }
 }

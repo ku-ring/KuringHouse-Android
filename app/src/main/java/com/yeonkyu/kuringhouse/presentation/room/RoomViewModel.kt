@@ -28,6 +28,7 @@ class RoomViewModel @Inject constructor(
             roomId = roomId,
             onSuccess = {
                 activeMemberList.postValue(it.participants)
+
                 enterRoom(it.id)
             }, onError = { code, message ->
                 Timber.e("getRoomInfo error [$code] : $message")
