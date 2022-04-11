@@ -32,6 +32,7 @@
             android:windowSoftInputMode="adjustResize" />
 
         <activity android:name=".presentation.preview.PreviewActivity" />
+        <activity android:name=".presentation.room.RoomActivity" />
     </application>
 
 </manifest>

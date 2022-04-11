@@ -1,5 +1,6 @@
 package com.yeonkyu.kuringhouse.presentation.preview
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.LinearLayout
 import androidx.activity.viewModels
@@ -10,6 +11,7 @@ import com.sendbird.calls.*
 import com.yeonkyu.kuringhouse.R
 import com.yeonkyu.kuringhouse.databinding.ActivityPreviewBinding
 import com.yeonkyu.kuringhouse.presentation.preview.bottomsheet.CreateRoomBottomSheet
+import com.yeonkyu.kuringhouse.presentation.room.RoomActivity
 import com.yeonkyu.kuringhouse.util.RecyclerViewPager
 import com.yeonkyu.kuringhouse.util.makeDialog
 import dagger.hilt.android.AndroidEntryPoint
@@ -56,9 +58,7 @@ class PreviewActivity : AppCompatActivity() {
 
     private fun setupListAdapter() {
         roomAdapter = RoomAdapter(
-            itemClick = {
-                // todo : start room activity
-            }
+            itemClick = { startRoomActivity(id = it.id, title = it.title) }
         )
 
         binding.previewRecyclerview.apply {
@@ -84,5 +84,13 @@ class PreviewActivity : AppCompatActivity() {
         viewModel.dialogEvent.observe(this) {
             makeDialog(getString(it))
         }
+    }
+
+    private fun startRoomActivity(id: String, title: String) {
+        val intent = Intent(this, RoomActivity::class.java).apply {
+            putExtra(RoomActivity.ROOM_ID, id)
+            putExtra(RoomActivity.ROOM_TITLE, title)
+        }
+        startActivity(intent)
     }
 }
