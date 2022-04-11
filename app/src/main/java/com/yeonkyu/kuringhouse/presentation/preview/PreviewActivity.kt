@@ -11,6 +11,7 @@ import com.yeonkyu.kuringhouse.R
 import com.yeonkyu.kuringhouse.databinding.ActivityPreviewBinding
 import com.yeonkyu.kuringhouse.presentation.preview.bottomsheet.CreateRoomBottomSheet
 import com.yeonkyu.kuringhouse.util.RecyclerViewPager
+import com.yeonkyu.kuringhouse.util.makeDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -78,6 +79,10 @@ class PreviewActivity : AppCompatActivity() {
         viewModel.roomList.observe(this) {
             roomAdapter.submitList(it)
             binding.previewSwipeRefresh.isRefreshing = false
+        }
+
+        viewModel.dialogEvent.observe(this) {
+            makeDialog(it)
         }
     }
 }

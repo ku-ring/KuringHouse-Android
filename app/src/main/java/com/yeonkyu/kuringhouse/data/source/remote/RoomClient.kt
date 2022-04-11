@@ -38,4 +38,18 @@ class RoomClient @Inject constructor(
     fun refreshRoomList() {
         query = call.createRoomListQuery(params)
     }
+
+    fun createRoom(
+        params: RoomParams,
+        onSuccess: (room: Room) -> Unit,
+        onError: (code: String, message: String) -> Unit
+    ) {
+        call.createRoom(params) { room, e ->
+            if (room == null || e != null) {
+                onError(e?.code.toString() , e?.message ?: "")
+            } else {
+                onSuccess(room)
+            }
+        }
+    }
 }

@@ -3,18 +3,24 @@ package com.yeonkyu.kuringhouse.presentation.preview
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.yeonkyu.kuringhouse.domain.model.Room
+import com.yeonkyu.kuringhouse.domain.usecase.room.CreateRoomUseCase
 import com.yeonkyu.kuringhouse.domain.usecase.room.GetRoomUseCase
+import com.yeonkyu.kuringhouse.presentation.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class PreviewViewModel @Inject constructor(
-    private val getRoomUseCase: GetRoomUseCase
+    private val getRoomUseCase: GetRoomUseCase,
+    private val createRoomUseCase: CreateRoomUseCase
 ) : ViewModel() {
 
-    val isLoading = MutableLiveData<Boolean>(false)
-    val isEnd = MutableLiveData<Boolean>(false)
+    val isLoading = MutableLiveData(false)
+    val isEnd = MutableLiveData(false)
+
+    val dialogEvent = SingleLiveEvent<String>()
+    val dismissBottomSheetEvent = SingleLiveEvent<Unit>()
 
     val roomList = MutableLiveData<List<Room>>()
 
@@ -39,5 +45,21 @@ class PreviewViewModel @Inject constructor(
 
     fun refreshRoomList() {
         getRoomUseCase.refresh()
+        isEnd.value = false
+    }
+
+    fun createRoom(title: String) {
+        createRoomUseCase.execute(
+            title = title,
+            onSuccess = {
+                refreshRoomList()
+                getRoomList()
+                dismissBottomSheetEvent.call()
+            }, onError = { code, message ->
+                Timber.e("createRoomList error [$code] $message")
+                dialogEvent.postValue("방을 만드는데 실패했습니다.")
+                dismissBottomSheetEvent.call()
+            }
+        )
     }
 }

@@ -10,4 +10,10 @@ interface RoomRepository {
     )
 
     fun refreshRoomList()
+
+    fun createRoom(
+        title: String,
+        onSuccess: (room: Room) -> Unit,
+        onError: (errorCode: String, errorMessage: String) -> Unit
+    )
 }
