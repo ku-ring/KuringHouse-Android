@@ -7,6 +7,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import com.yeonkyu.kuringhouse.R
 import com.yeonkyu.kuringhouse.databinding.ActivityRoomBinding
+import com.yeonkyu.kuringhouse.util.makeDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,6 +24,7 @@ class RoomActivity : AppCompatActivity() {
         setupBinding()
         setupView()
         setupListAdapter()
+        observeData()
     }
 
     private fun setupBinding() {
@@ -33,7 +35,15 @@ class RoomActivity : AppCompatActivity() {
 
     private fun setupView() {
         viewModel.roomName.postValue(intent.getStringExtra(ROOM_TITLE) ?: "")
-        viewModel.getRoomInfo()
+
+        viewModel.roomId = intent.getStringExtra(ROOM_ID) ?: ""
+        if (viewModel.roomId.isEmpty()) {
+            makeDialog(getString(R.string.room_info_fail_try_again))
+                .setOnDismissListener { finish() }
+        }
+        else {
+            viewModel.getRoomInfo(viewModel.roomId)
+        }
     }
 
     private fun setupListAdapter() {
@@ -42,6 +52,16 @@ class RoomActivity : AppCompatActivity() {
         binding.recyclerview.apply {
             adapter = memberAdapter
             layoutManager = GridLayoutManager(this@RoomActivity, 3)
+        }
+    }
+
+    private fun observeData() {
+        viewModel.activeMemberList.observe(this) {
+            memberAdapter.submitList(it)
+        }
+
+        viewModel.dialogEvent.observe(this) {
+            makeDialog(getString(it))
         }
     }
 

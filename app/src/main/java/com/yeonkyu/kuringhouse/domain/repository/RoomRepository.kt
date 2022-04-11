@@ -16,4 +16,10 @@ interface RoomRepository {
         onSuccess: (room: Room) -> Unit,
         onError: (errorCode: String, errorMessage: String) -> Unit
     )
+
+    fun getRoomInfo(
+        roomId: String,
+        onSuccess: (Room) -> Unit,
+        onError: (code: String, message: String) -> Unit
+    )
 }

@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.yeonkyu.kuringhouse.R
 import com.yeonkyu.kuringhouse.domain.model.Room
 import com.yeonkyu.kuringhouse.domain.usecase.room.CreateRoomUseCase
-import com.yeonkyu.kuringhouse.domain.usecase.room.GetRoomUseCase
+import com.yeonkyu.kuringhouse.domain.usecase.room.GetRoomListUseCase
 import com.yeonkyu.kuringhouse.presentation.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import timber.log.Timber
@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PreviewViewModel @Inject constructor(
-    private val getRoomUseCase: GetRoomUseCase,
+    private val getRoomListUseCase: GetRoomListUseCase,
     private val createRoomUseCase: CreateRoomUseCase
 ) : ViewModel() {
 
@@ -31,7 +31,7 @@ class PreviewViewModel @Inject constructor(
 
     fun getRoomList() {
         isLoading.postValue(true)
-        getRoomUseCase.execute(
+        getRoomListUseCase.execute(
             onSuccess = {
                 roomList.postValue(it)
                 isLoading.postValue(false)
@@ -45,7 +45,7 @@ class PreviewViewModel @Inject constructor(
     }
 
     fun refreshRoomList() {
-        getRoomUseCase.refresh()
+        getRoomListUseCase.refresh()
         isEnd.value = false
     }
 
@@ -57,7 +57,7 @@ class PreviewViewModel @Inject constructor(
                 getRoomList()
                 dismissBottomSheetEvent.call()
             }, onError = { code, message ->
-                Timber.e("createRoomList error [$code] $message")
+                Timber.e("createRoomList error [$code] : $message")
                 dialogEvent.postValue(R.string.create_room_fail)
                 dismissBottomSheetEvent.call()
             }

@@ -46,7 +46,21 @@ class RoomClient @Inject constructor(
     ) {
         call.createRoom(params) { room, e ->
             if (room == null || e != null) {
-                onError(e?.code.toString() , e?.message ?: "")
+                onError(e?.code.toString(), e?.message ?: "")
+            } else {
+                onSuccess(room)
+            }
+        }
+    }
+
+    fun getRoomInfo(
+        roomId: String,
+        onSuccess: (room: Room) -> Unit,
+        onError: (code: String, message: String) -> Unit
+    ) {
+        call.fetchRoomById(roomId) { room, e ->
+            if (room == null || e != null) {
+                onError(e?.code.toString(), e?.message ?: "")
             } else {
                 onSuccess(room)
             }

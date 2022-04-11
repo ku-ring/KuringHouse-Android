@@ -49,12 +49,26 @@ class RoomRepositoryImpl(
             .setCustomItems(customItems)
 
         roomClient.createRoom(
-            params = params
-            , onSuccess = {
+            params = params,
+            onSuccess = {
                 onSuccess(it.toRoom())
             }, onError = { code, message ->
                 onError(code, message)
             }
         )
+    }
+
+    override fun getRoomInfo(
+        roomId: String,
+        onSuccess: (Room) -> Unit,
+        onError: (code: String, message: String) -> Unit
+    ) {
+        roomClient.getRoomInfo(
+            roomId = roomId,
+            onSuccess = {
+                onSuccess(it.toRoom())
+            }, onError = { code, message ->
+                onError(code, message)
+            })
     }
 }

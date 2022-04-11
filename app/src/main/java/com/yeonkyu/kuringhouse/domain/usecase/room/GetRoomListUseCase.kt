@@ -4,7 +4,7 @@ import com.yeonkyu.kuringhouse.domain.model.Room
 import com.yeonkyu.kuringhouse.domain.repository.RoomRepository
 import javax.inject.Inject
 
-class GetRoomUseCase @Inject constructor(
+class GetRoomListUseCase @Inject constructor(
     private val repository: RoomRepository
 ) {
     fun execute(

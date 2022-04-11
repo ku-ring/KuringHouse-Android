@@ -22,4 +22,6 @@
     <string name="create_room_fail">방을 만드는데 실패했습니다.</string>
     <string name="room_description">현재 음소거 상태입니다. \n대화에 참여하시려면 마이크 버튼을 눌러주세요</string>
     <string name="exit_room_quietly">✌ 조용히 나가기</string>
+    <string name="room_info_fail">방 정보를 가져오는데 실패했습니다.</string>
+    <string name="room_info_fail_try_again">방 정보를 가져오는데 실패하였습니다. \n다시 시도해주세요</string>
 </resources>

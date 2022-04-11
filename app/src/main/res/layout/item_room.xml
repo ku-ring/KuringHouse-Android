@@ -48,7 +48,7 @@
             android:fontFamily="@font/notosanskr_regular"
             android:textColor="@color/kus_gray"
             android:textSize="12sp"
-            android:text="@{roomInfo.participants}"
+            android:text="@{Integer.toString(roomInfo.participants.size())}"
             app:layout_constraintBottom_toBottomOf="@id/room_people_iv"
             app:layout_constraintStart_toEndOf="@+id/room_people_iv"
             app:layout_constraintTop_toTopOf="@+id/room_people_iv"
