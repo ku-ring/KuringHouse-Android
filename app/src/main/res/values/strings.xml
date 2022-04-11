@@ -19,4 +19,5 @@
     <string name="create_room_start">새 방 시작하기</string>
     <string name="create_room_name">방 제목을 입력해주세요</string>
     <string name="create_room">방 만들기</string>
+    <string name="create_room_fail">방을 만드는데 실패했습니다.</string>
 </resources>

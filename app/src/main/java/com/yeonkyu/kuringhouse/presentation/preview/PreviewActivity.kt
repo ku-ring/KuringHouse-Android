@@ -82,7 +82,7 @@ class PreviewActivity : AppCompatActivity() {
         }
 
         viewModel.dialogEvent.observe(this) {
-            makeDialog(it)
+            makeDialog(getString(it))
         }
     }
 }

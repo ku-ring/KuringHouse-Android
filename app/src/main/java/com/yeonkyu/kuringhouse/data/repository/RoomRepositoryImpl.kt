@@ -7,6 +7,7 @@ import com.yeonkyu.kuringhouse.data.mapper.toRoomList
 import com.yeonkyu.kuringhouse.data.source.remote.RoomClient
 import com.yeonkyu.kuringhouse.domain.model.Room
 import com.yeonkyu.kuringhouse.domain.repository.RoomRepository
+import com.yeonkyu.kuringhouse.domain.util.roomName
 
 class RoomRepositoryImpl(
     private val roomClient: RoomClient
@@ -43,7 +44,7 @@ class RoomRepositoryImpl(
         onSuccess: (Room) -> Unit,
         onError: (errorCode: String, errorMessage: String) -> Unit
     ) {
-        val customItems: Map<String, String> = mapOf(Pair("name", title))
+        val customItems: Map<String, String> = mapOf(Pair(roomName, title))
         val params = RoomParams(RoomType.LARGE_ROOM_FOR_AUDIO_ONLY)
             .setCustomItems(customItems)
 

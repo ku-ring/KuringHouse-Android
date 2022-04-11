@@ -2,6 +2,7 @@ package com.yeonkyu.kuringhouse.presentation.preview
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.yeonkyu.kuringhouse.R
 import com.yeonkyu.kuringhouse.domain.model.Room
 import com.yeonkyu.kuringhouse.domain.usecase.room.CreateRoomUseCase
 import com.yeonkyu.kuringhouse.domain.usecase.room.GetRoomUseCase
@@ -19,7 +20,7 @@ class PreviewViewModel @Inject constructor(
     val isLoading = MutableLiveData(false)
     val isEnd = MutableLiveData(false)
 
-    val dialogEvent = SingleLiveEvent<String>()
+    val dialogEvent = SingleLiveEvent<Int>()
     val dismissBottomSheetEvent = SingleLiveEvent<Unit>()
 
     val roomList = MutableLiveData<List<Room>>()
@@ -57,7 +58,7 @@ class PreviewViewModel @Inject constructor(
                 dismissBottomSheetEvent.call()
             }, onError = { code, message ->
                 Timber.e("createRoomList error [$code] $message")
-                dialogEvent.postValue("방을 만드는데 실패했습니다.")
+                dialogEvent.postValue(R.string.create_room_fail)
                 dismissBottomSheetEvent.call()
             }
         )
