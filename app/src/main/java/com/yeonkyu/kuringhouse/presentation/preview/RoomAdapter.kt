@@ -51,7 +51,7 @@ class RoomAdapter constructor(
         override fun areContentsTheSame(oldItem: Room, newItem: Room): Boolean {
             return oldItem.id == newItem.id
                     && oldItem.title == newItem.title
-                    && oldItem.participants == oldItem.participants
+                    && oldItem.participants == newItem.participants
         }
     }
 }
