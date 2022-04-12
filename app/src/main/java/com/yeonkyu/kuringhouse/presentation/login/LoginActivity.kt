@@ -21,6 +21,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setupBinding()
+        setupView()
         observeEvent()
 
         binding.loginAuthorizeBt.setOnClickListener {
@@ -32,6 +33,12 @@ class LoginActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
+    }
+
+    private fun setupView() {
+        binding.getInvitationTxt.setOnClickListener {
+            binding.webview.loadUrl("https://bit.ly/3I30uiG")
+        }
     }
 
     private fun observeEvent() {

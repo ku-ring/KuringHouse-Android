@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.yeonkyu.kuringhouse.presentation.login.LoginViewModel" />
@@ -34,7 +35,6 @@
             android:layout_marginTop="40dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="10dp"
-            app:layout_constraintTop_toBottomOf="@+id/welcome_tv"
             android:autofillHints="no"
             android:background="@drawable/edittext_green"
             android:elevation="2dp"
@@ -49,7 +49,8 @@
             android:text="@={viewModel.email}"
             android:textColor="@color/kus_primary"
             android:textColorHint="@color/kus_secondary_gray"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@+id/welcome_tv" />
 
         <EditText
             android:id="@+id/login_invitation_code_et"
@@ -59,7 +60,6 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="10dp"
-            app:layout_constraintTop_toBottomOf="@+id/login_email_et"
             android:autofillHints="no"
             android:background="@drawable/edittext_green"
             android:elevation="2dp"
@@ -74,7 +74,8 @@
             android:text="@={viewModel.accessToken}"
             android:textColor="@color/kus_primary"
             android:textColorHint="@color/kus_secondary_gray"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@+id/login_email_et" />
 
         <Button
             android:id="@+id/login_authorize_bt"
@@ -82,7 +83,7 @@
             android:layout_height="52dp"
             android:layout_marginStart="64dp"
             android:layout_marginEnd="64dp"
-            android:layout_marginBottom="60dp"
+            android:layout_marginBottom="100dp"
             android:background="@drawable/button_green_radius32"
             android:fontFamily="@font/sfpro_display_regular"
             android:gravity="center"
@@ -91,5 +92,25 @@
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent" />
 
+        <TextView
+            android:id="@+id/get_invitation_txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/notosanskr_regular"
+            android:gravity="center_horizontal"
+            android:text="@string/get_invitation_code"
+            android:textColor="@color/kus_green"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@+id/login_authorize_bt" />
+
+        <WebView
+            android:id="@+id/webview"
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
