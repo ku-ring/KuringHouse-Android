@@ -20,6 +20,7 @@
     <string name="create_room_start">새 방 시작하기</string>
     <string name="create_room_name">방 제목을 입력해주세요</string>
     <string name="create_room">방 만들기</string>
+    <string name="room_title_too_short">방 제목은 최소 2글자 이상 입력해주세요</string>
     <string name="create_room_fail">방을 만드는데 실패했습니다.</string>
     <string name="room_description">현재 음소거 상태입니다. \n대화에 참여하시려면 마이크 버튼을 눌러주세요</string>
     <string name="exit_room_quietly">✌ 조용히 나가기</string>

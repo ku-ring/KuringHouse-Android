@@ -81,6 +81,10 @@ class PreviewActivity : AppCompatActivity() {
             binding.previewSwipeRefresh.isRefreshing = false
         }
 
+        viewModel.createdRoomEvent.observe(this) {
+            startRoomActivity(it.id, it.title)
+        }
+
         viewModel.dialogEvent.observe(this) {
             makeDialog(getString(it))
         }
@@ -92,5 +96,12 @@ class PreviewActivity : AppCompatActivity() {
             putExtra(RoomActivity.ROOM_TITLE, title)
         }
         startActivity(intent)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        roomAdapter.submitList(emptyList())
+        viewModel.refreshRoomList()
+        viewModel.getRoomList()
     }
 }

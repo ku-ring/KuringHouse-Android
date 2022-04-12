@@ -9,6 +9,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.yeonkyu.kuringhouse.R
 import com.yeonkyu.kuringhouse.databinding.BottomSheetCreateRoomBinding
 import com.yeonkyu.kuringhouse.presentation.preview.PreviewViewModel
+import com.yeonkyu.kuringhouse.util.makeDialog
 
 class CreateRoomBottomSheet : BottomSheetDialogFragment() {
 
@@ -41,7 +42,11 @@ class CreateRoomBottomSheet : BottomSheetDialogFragment() {
     private fun setupView() {
         binding.createRoomStart.setOnClickListener {
             val title = binding.createRoomName.text.toString()
-            viewModel.createRoom(title)
+            if (title.length < 2 || title.isBlank()) {
+                requireContext().makeDialog(getString(R.string.room_title_too_short))
+            } else {
+                viewModel.createRoom(title)
+            }
         }
     }
 

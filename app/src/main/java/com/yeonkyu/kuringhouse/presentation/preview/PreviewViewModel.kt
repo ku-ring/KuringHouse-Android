@@ -22,12 +22,9 @@ class PreviewViewModel @Inject constructor(
 
     val dialogEvent = SingleLiveEvent<Int>()
     val dismissBottomSheetEvent = SingleLiveEvent<Unit>()
+    val createdRoomEvent= SingleLiveEvent<Room>()
 
     val roomList = MutableLiveData<List<Room>>()
-
-    init {
-        getRoomList()
-    }
 
     fun getRoomList() {
         isLoading.postValue(true)
@@ -53,9 +50,8 @@ class PreviewViewModel @Inject constructor(
         createRoomUseCase.execute(
             title = title,
             onSuccess = {
-                refreshRoomList()
-                getRoomList()
                 dismissBottomSheetEvent.call()
+                createdRoomEvent.postValue(it)
             }, onError = { code, message ->
                 Timber.e("createRoomList error [$code] : $message")
                 dialogEvent.postValue(R.string.create_room_fail)
