@@ -42,8 +42,8 @@ class LoginViewModel @Inject constructor(
     }
 
     fun authorize() {
-        val email = email.value?.trim() ?: ""
-        val accessToken = accessToken.value?.trim() ?: ""
+        val email = email.value ?: ""
+        val accessToken = accessToken.value ?: ""
 
         if (email.isEmpty()) {
             dialogEvent.postValue(Pair("이메일을 입력해주세요.", null))
