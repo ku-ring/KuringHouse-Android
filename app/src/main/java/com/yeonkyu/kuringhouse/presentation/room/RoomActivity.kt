@@ -42,7 +42,7 @@ class RoomActivity : AppCompatActivity() {
                 .setOnDismissListener { finish() }
         }
         else {
-            viewModel.getRoomInfo(viewModel.roomId)
+            viewModel.getRoom(viewModel.roomId)
         }
     }
 

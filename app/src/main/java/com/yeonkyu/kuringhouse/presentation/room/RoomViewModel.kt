@@ -23,13 +23,22 @@ class RoomViewModel @Inject constructor(
 
     val dialogEvent = SingleLiveEvent<Int>()
 
-    fun getRoomInfo(roomId: String) {
+    fun getRoom(roomId: String) {
+        getRoomInfoUseCase.execute(
+            roomId = roomId,
+            onSuccess = {
+                enterRoom(it.id)
+            }, onError = { code, message ->
+                Timber.e("getRoom error [$code] : $message")
+                dialogEvent.postValue(R.string.room_info_fail)
+            })
+    }
+
+    private fun getRoomInfo(roomId: String) {
         getRoomInfoUseCase.execute(
             roomId = roomId,
             onSuccess = {
                 activeMemberList.postValue(it.participants)
-
-                enterRoom(it.id)
             }, onError = { code, message ->
                 Timber.e("getRoomInfo error [$code] : $message")
                 dialogEvent.postValue(R.string.room_info_fail)
@@ -41,6 +50,7 @@ class RoomViewModel @Inject constructor(
             roomId = roomId,
             onSuccess = {
                 Timber.e("enterRoom success")
+                getRoomInfo(roomId)
             }, onError = { code, message ->
                 Timber.e("enterRoom error [$code] : $message")
                 dialogEvent.postValue(R.string.enter_room_fail)
