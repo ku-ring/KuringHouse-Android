@@ -33,12 +33,13 @@ class KuringHouseDialog(context: Context) : Dialog(context) {
         }
     }
 
-    fun setMainText(str: String) {
-        mainText = str
-    }
-
-    fun setSubText(str: String) {
-        subText = str
+    fun set(title: String? = null, description: String? = null) {
+        title?.let {
+            mainText = mainText
+        }
+        description?.let {
+            subText = description
+        }
     }
 
     override fun show() {
