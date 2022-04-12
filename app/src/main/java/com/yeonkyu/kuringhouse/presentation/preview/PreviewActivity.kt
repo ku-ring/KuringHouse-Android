@@ -52,7 +52,7 @@ class PreviewActivity : AppCompatActivity() {
             pager.resetPage()
             viewModel.refreshRoomList()
             viewModel.isEnd.value = false
-            viewModel.getRoomList()
+            viewModel.fetchRoomList()
         }
     }
 
@@ -66,7 +66,7 @@ class PreviewActivity : AppCompatActivity() {
             pager = RecyclerViewPager(
                 recyclerView = this,
                 isLoading = { viewModel.isLoading.value == true },
-                loadNext = { viewModel.getRoomList() },
+                loadNext = { viewModel.fetchRoomList() },
                 isEnd = { viewModel.isEnd.value == true }
             )
 
@@ -102,6 +102,6 @@ class PreviewActivity : AppCompatActivity() {
         super.onResume()
         roomAdapter.submitList(emptyList())
         viewModel.refreshRoomList()
-        viewModel.getRoomList()
+        viewModel.fetchRoomList()
     }
 }

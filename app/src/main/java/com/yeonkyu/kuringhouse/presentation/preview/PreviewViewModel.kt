@@ -26,7 +26,7 @@ class PreviewViewModel @Inject constructor(
 
     val roomList = MutableLiveData<List<Room>>()
 
-    fun getRoomList() {
+    fun fetchRoomList() {
         isLoading.postValue(true)
         getRoomListUseCase.execute(
             onSuccess = {

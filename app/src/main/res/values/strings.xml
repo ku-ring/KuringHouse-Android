@@ -27,4 +27,5 @@
     <string name="room_info_fail">방 정보를 가져오는데 실패했습니다.</string>
     <string name="room_info_fail_try_again">방 정보를 가져오는데 실패하였습니다. \n다시 시도해주세요</string>
     <string name="enter_room_fail">방 입장에 실패했습니다.</string>
+    <string name="no_room_description">쿠링하우스에 현재 생성된 방이 없습니다. \n새로운 방을 만들어 팀원들과 이야기해보세요!</string>
 </resources>
