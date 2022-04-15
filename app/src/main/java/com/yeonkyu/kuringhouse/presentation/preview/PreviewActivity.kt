@@ -1,13 +1,18 @@
 package com.yeonkyu.kuringhouse.presentation.preview
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import android.widget.LinearLayout
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DividerItemDecoration
-import com.sendbird.calls.*
 import com.yeonkyu.kuringhouse.R
 import com.yeonkyu.kuringhouse.databinding.ActivityPreviewBinding
 import com.yeonkyu.kuringhouse.presentation.preview.bottomsheet.CreateRoomBottomSheet
@@ -25,6 +30,13 @@ class PreviewActivity : AppCompatActivity() {
     private lateinit var roomAdapter: RoomAdapter
     private lateinit var pager: RecyclerViewPager
 
+    private val requestAudioPermission = registerForActivityResult(ActivityResultContracts.RequestPermission()) {
+        if (it == false) {
+            makeDialog(getString(R.string.no_permission_description))
+                .setOnConfirmClickLister { reRequestPermission() }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -32,6 +44,10 @@ class PreviewActivity : AppCompatActivity() {
         setupView()
         setupListAdapter()
         observeData()
+
+        if (!checkPermissionGranted()) {
+            requestAudioPermission.launch(Manifest.permission.RECORD_AUDIO)
+        }
     }
 
     private fun setupBinding() {
@@ -58,7 +74,13 @@ class PreviewActivity : AppCompatActivity() {
 
     private fun setupListAdapter() {
         roomAdapter = RoomAdapter(
-            itemClick = { startRoomActivity(id = it.id, title = it.title) }
+            itemClick = {
+                if (checkPermissionGranted()) {
+                    startRoomActivity(id = it.id, title = it.title)
+                } else {
+                    requestAudioPermission.launch(Manifest.permission.RECORD_AUDIO)
+                }
+            }
         )
 
         binding.previewRecyclerview.apply {
@@ -88,6 +110,21 @@ class PreviewActivity : AppCompatActivity() {
         viewModel.dialogEvent.observe(this) {
             makeDialog(getString(it))
         }
+    }
+
+    private fun checkPermissionGranted(): Boolean {
+        val audioPermission = ContextCompat.checkSelfPermission(
+            this,
+            Manifest.permission.RECORD_AUDIO
+        )
+        return audioPermission == PackageManager.PERMISSION_GRANTED
+    }
+
+    private fun reRequestPermission() {
+        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+            data = Uri.parse("package:$packageName")
+        }
+        startActivity(intent)
     }
 
     private fun startRoomActivity(id: String, title: String) {

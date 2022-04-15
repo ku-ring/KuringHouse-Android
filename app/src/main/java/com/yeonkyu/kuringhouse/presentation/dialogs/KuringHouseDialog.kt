@@ -42,6 +42,13 @@ class KuringHouseDialog(context: Context) : Dialog(context) {
         }
     }
 
+    fun setOnConfirmClickLister(onClickListener: View.OnClickListener) = this.apply {
+        dismissBt.setOnClickListener { v ->
+            onClickListener.onClick(v)
+            dismiss()
+        }
+    }
+
     override fun show() {
         super.show()
         mainText?.let {
