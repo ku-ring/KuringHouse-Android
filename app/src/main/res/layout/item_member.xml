@@ -22,7 +22,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:background="@null"
-            android:src="@drawable/ic_mic" />
+            android:src="@drawable/ic_mic_on" />
 
         <TextView
             android:id="@+id/nickname"

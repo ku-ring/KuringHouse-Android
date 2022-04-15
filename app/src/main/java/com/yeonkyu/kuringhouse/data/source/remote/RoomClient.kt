@@ -2,6 +2,7 @@ package com.yeonkyu.kuringhouse.data.source.remote
 
 import com.sendbird.calls.*
 import com.sendbird.calls.handler.RoomListQueryResultHandler
+import timber.log.Timber
 import javax.inject.Inject
 
 class RoomClient @Inject constructor(
@@ -94,9 +95,17 @@ class RoomClient @Inject constructor(
         }
     }
 
-    fun isIn(roomId: String) {
+    fun muteMic(roomId: String) {
         call.getCachedRoomById(roomId)?.run {
-            this.participants
+            this.localParticipant!!.muteMicrophone()
+            Timber.e("mute")
+        }
+    }
+
+    fun unMuteMic(roomId: String) {
+        call.getCachedRoomById(roomId)?.run {
+            this.localParticipant!!.unmuteMicrophone()
+            Timber.e("unMute")
         }
     }
 }

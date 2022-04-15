@@ -28,4 +28,8 @@ interface RoomRepository {
         onSuccess: () -> Unit,
         onError: (code: String, message: String) -> Unit
     )
+
+    fun muteMic(roomId: String)
+
+    fun unMuteMic(roomId: String)
 }

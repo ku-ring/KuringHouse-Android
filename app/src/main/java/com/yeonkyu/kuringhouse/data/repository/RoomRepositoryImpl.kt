@@ -85,4 +85,12 @@ class RoomRepositoryImpl(
                 onError(code, message)
             })
     }
+
+    override fun muteMic(roomId: String) {
+        roomClient.muteMic(roomId)
+    }
+
+    override fun unMuteMic(roomId: String) {
+        roomClient.unMuteMic(roomId)
+    }
 }

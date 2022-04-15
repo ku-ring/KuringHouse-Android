@@ -44,6 +44,10 @@ class RoomActivity : AppCompatActivity() {
         else {
             viewModel.getRoom(viewModel.roomId)
         }
+
+        binding.roomMic.setOnClickListener {
+            viewModel.switchMic()
+        }
     }
 
     private fun setupListAdapter() {
@@ -62,6 +66,14 @@ class RoomActivity : AppCompatActivity() {
 
         viewModel.dialogEvent.observe(this) {
             makeDialog(getString(it))
+        }
+
+        viewModel.isMicOn.observe(this) {
+            if (it == true) {
+                binding.roomMic.setImageResource(R.drawable.ic_mic_on)
+            } else {
+                binding.roomMic.setImageResource(R.drawable.ic_mic_off)
+            }
         }
     }
 

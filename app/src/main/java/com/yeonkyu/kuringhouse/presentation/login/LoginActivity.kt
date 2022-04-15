@@ -23,10 +23,6 @@ class LoginActivity : AppCompatActivity() {
         setupBinding()
         setupView()
         observeEvent()
-
-        binding.loginAuthorizeBt.setOnClickListener {
-            viewModel.authorize()
-        }
     }
 
     private fun setupBinding() {
@@ -36,6 +32,10 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun setupView() {
+        binding.loginAuthorizeBt.setOnClickListener {
+            viewModel.authorize()
+        }
+
         binding.getInvitationTxt.setOnClickListener {
             binding.webview.loadUrl("https://bit.ly/3I30uiG")
         }
