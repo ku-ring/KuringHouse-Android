@@ -48,6 +48,10 @@ class RoomActivity : AppCompatActivity() {
         binding.roomMic.setOnClickListener {
             viewModel.switchMic()
         }
+
+        binding.exitBt.setOnClickListener {
+            viewModel.leaveRoom(viewModel.roomId)
+        }
     }
 
     private fun setupListAdapter() {
@@ -74,6 +78,10 @@ class RoomActivity : AppCompatActivity() {
             } else {
                 binding.roomMic.setImageResource(R.drawable.ic_mic_off)
             }
+        }
+
+        viewModel.quitEvent.observe(this) {
+            finish()
         }
     }
 

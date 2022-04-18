@@ -6,7 +6,8 @@ import timber.log.Timber
 import javax.inject.Inject
 
 class RoomClient @Inject constructor(
-    private val call: SendBirdCall
+    private val call: SendBirdCall,
+    private val apiService: ApiService
 ) {
 
     private val params = RoomListQuery.Params()
@@ -97,6 +98,7 @@ class RoomClient @Inject constructor(
 
     fun muteMic(roomId: String) {
         call.getCachedRoomById(roomId)?.run {
+            // todo : re-implement - remove '!!'
             this.localParticipant!!.muteMicrophone()
             Timber.e("mute")
         }
@@ -106,6 +108,16 @@ class RoomClient @Inject constructor(
         call.getCachedRoomById(roomId)?.run {
             this.localParticipant!!.unmuteMicrophone()
             Timber.e("unMute")
+        }
+    }
+
+    suspend fun exitRoom(roomId: String) {
+        call.getCachedRoomById(roomId)?.run {
+            this.exit()
+            if (this.participants.isEmpty()) {
+                val response = apiService.deleteRoom(roomId)
+                Timber.e("room response : $response")
+            }
         }
     }
 }

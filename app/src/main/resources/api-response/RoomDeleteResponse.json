@@ -1,0 +1,15 @@
+{
+  "room": {
+    "created_by": "cus1128@naver.com",
+    "deleted_by": "",
+    "state": "deleted",
+    "room_id": "ce8db108-149e-41db-b7db-dc253deb8b00",
+    "room_type": "large_room_for_audio_only",
+    "created_at": 1649869900237,
+    "updated_at": 1650273158488,
+    "current_participants": [],
+    "custom_items": {
+      "name": "adsfasdf"
+    }
+  }
+}

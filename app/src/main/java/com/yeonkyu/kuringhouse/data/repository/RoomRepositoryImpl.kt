@@ -93,4 +93,8 @@ class RoomRepositoryImpl(
     override fun unMuteMic(roomId: String) {
         roomClient.unMuteMic(roomId)
     }
+
+    override suspend fun exitRoom(roomId: String) {
+        roomClient.exitRoom(roomId)
+    }
 }

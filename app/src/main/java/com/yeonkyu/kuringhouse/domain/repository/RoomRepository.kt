@@ -32,4 +32,6 @@ interface RoomRepository {
     fun muteMic(roomId: String)
 
     fun unMuteMic(roomId: String)
+
+    suspend fun exitRoom(roomId: String)
 }

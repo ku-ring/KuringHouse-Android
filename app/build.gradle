@@ -21,6 +21,7 @@ android {
         localProperties.load(new FileInputStream(localPropertiesFile))
 
         buildConfigField "String", "SENDBIRD_APP_ID", localProperties['SENDBIRD_APP_ID']
+        buildConfigField "String", "SENDBIRD_API_TOKEN", localProperties['SENDBIRD_API_TOKEN']
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -69,6 +70,17 @@ dependencies {
 
     // sendbird sdk
     implementation 'com.sendbird.sdk:sendbird-calls:1.8.0'
+
+    // retrofit
+    def retrofit_version = "2.9.0"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+
+    // okHttp
+    def okHttp_version = "4.9.0"
+    implementation "com.squareup.okhttp3:okhttp:$okHttp_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okHttp_version"
+    testImplementation "com.squareup.okhttp3:mockwebserver:$okHttp_version"
 
     // Timber
     implementation 'com.jakewharton.timber:timber:4.7.1'
