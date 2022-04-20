@@ -115,9 +115,13 @@ class RoomClient @Inject constructor(
         call.getCachedRoomById(roomId)?.run {
             this.exit()
             if (this.participants.isEmpty()) {
-                val response = apiService.deleteRoom(roomId)
-                Timber.e("room response : $response")
+                try {
+                    apiService.deleteRoom(roomId)
+                } catch (e: Exception) {
+                    Timber.e("delete room error : $e")
+                }
             }
+            Timber.e("room exited")
         }
     }
 }

@@ -6,7 +6,6 @@ import javax.inject.Inject
 class LeaveRoomUseCase @Inject constructor(
     private val repository: RoomRepository
 ) {
-
     suspend fun execute(roomId: String) {
         repository.exitRoom(roomId)
     }

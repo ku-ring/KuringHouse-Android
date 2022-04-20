@@ -2,6 +2,7 @@ package com.yeonkyu.kuringhouse.data.mapper
 
 import com.sendbird.calls.Participant
 import com.sendbird.calls.Room
+import com.yeonkyu.kuringhouse.data.model.RoomResponse
 import com.yeonkyu.kuringhouse.domain.model.Member
 import com.yeonkyu.kuringhouse.domain.util.roomName
 
@@ -19,4 +20,10 @@ fun Participant.toMember() = Member(
     id = this.participantId,
     nickname = this.user.nickname ?: this.user.userId,
     profile = this.user.profileUrl ?: ""
+)
+
+fun RoomResponse.toRoom() = com.yeonkyu.kuringhouse.domain.model.Room(
+    id = this.room.roomId,
+    title = "",
+    participants = emptyList()
 )

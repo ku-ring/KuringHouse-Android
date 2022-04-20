@@ -8,6 +8,8 @@ import com.yeonkyu.kuringhouse.data.source.remote.RoomClient
 import com.yeonkyu.kuringhouse.domain.model.Room
 import com.yeonkyu.kuringhouse.domain.repository.RoomRepository
 import com.yeonkyu.kuringhouse.domain.util.roomName
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class RoomRepositoryImpl(
     private val roomClient: RoomClient
@@ -95,6 +97,8 @@ class RoomRepositoryImpl(
     }
 
     override suspend fun exitRoom(roomId: String) {
-        roomClient.exitRoom(roomId)
+        return withContext(Dispatchers.IO) {
+            roomClient.exitRoom(roomId)
+        }
     }
 }
