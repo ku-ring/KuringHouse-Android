@@ -25,7 +25,9 @@ class RoomRepositoryImpl(
         roomClient.retrieveRoomList(
             onSuccess = {
                 for (room in it) {
-                    roomList.add(room)
+                    if (room.participants.isNotEmpty()) {
+                        roomList.add(room)
+                    }
                 }
                 onSuccess(roomList.toRoomList())
             }, onError = { errorCode, errorMessage ->
