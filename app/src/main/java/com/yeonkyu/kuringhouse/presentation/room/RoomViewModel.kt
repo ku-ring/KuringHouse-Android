@@ -10,6 +10,7 @@ import com.yeonkyu.kuringhouse.domain.usecase.room.EnterRoomUseCase
 import com.yeonkyu.kuringhouse.domain.usecase.room.GetRoomInfoUseCase
 import com.yeonkyu.kuringhouse.domain.usecase.room.LeaveRoomUseCase
 import com.yeonkyu.kuringhouse.domain.usecase.room.SwitchMicUseCase
+import com.yeonkyu.kuringhouse.domain.util.succeeded
 import com.yeonkyu.kuringhouse.presentation.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -39,8 +40,8 @@ class RoomViewModel @Inject constructor(
     val dialogEvent: SingleLiveEvent<Int>
         get() = _dialogEvent
 
-    private val _quitEvent = SingleLiveEvent<Unit>()
-    val quitEvent: SingleLiveEvent<Unit>
+    private val _quitEvent = SingleLiveEvent<Int?>()
+    val quitEvent: SingleLiveEvent<Int?>
         get() = _quitEvent
 
     fun getRoom(roomId: String) {
@@ -79,22 +80,36 @@ class RoomViewModel @Inject constructor(
 
     fun switchMic() {
         if (isMicOn.value == true) {
-            switchMicUseCase.muteMic(roomId)
-            _isMicOn.postValue(false)
+            switchMicUseCase.muteMic(
+                roomId = roomId,
+                onSuccess = {
+                    _isMicOn.postValue(false)
+                }, onError = {
+                    _quitEvent.postValue(R.string.connection_fail)
+                })
         } else {
-            switchMicUseCase.unMuteMic(roomId)
-            _isMicOn.postValue(true)
+            switchMicUseCase.unMuteMic(
+                roomId = roomId,
+                onSuccess = {
+                    _isMicOn.postValue(true)
+                }, onError = {
+                    _quitEvent.postValue(R.string.connection_fail)
+                })
         }
     }
 
     fun leaveRoom(roomId: String) {
         viewModelScope.launch {
             try {
-                leaveRoomUseCase.execute(roomId)
-                _quitEvent.call()
+                val response = leaveRoomUseCase.execute(roomId)
+                if (response.succeeded) {
+                    _quitEvent.call()
+                } else {
+                    _quitEvent.postValue(R.string.leave_room_fail)
+                }
             } catch (e: Exception) {
                 Timber.e("leaveRoom error : $e")
-                _dialogEvent.postValue(R.string.leave_room_fail)
+                _quitEvent.postValue(R.string.leave_room_fail)
             }
         }
     }

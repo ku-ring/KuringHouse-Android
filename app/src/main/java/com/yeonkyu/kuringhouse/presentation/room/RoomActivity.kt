@@ -50,7 +50,7 @@ class RoomActivity : AppCompatActivity() {
         }
 
         binding.exitBt.setOnClickListener {
-            viewModel.leaveRoom(viewModel.roomId)
+            showLeaveRoomDialog()
         }
     }
 
@@ -80,9 +80,23 @@ class RoomActivity : AppCompatActivity() {
             }
         }
 
-        viewModel.quitEvent.observe(this) {
-            finish()
+        viewModel.quitEvent.observe(this) { message ->
+            message?.let {
+                makeDialog(getString(it))
+                    .setOnDismissListener { finish() }
+            } ?: finish()
         }
+    }
+
+    override fun onBackPressed() {
+        showLeaveRoomDialog()
+    }
+
+    private fun showLeaveRoomDialog() {
+        makeDialog(getString(R.string.ask_to_leave_room))
+            .setOnDismissListener {
+                viewModel.leaveRoom(viewModel.roomId)
+            }
     }
 
     companion object {

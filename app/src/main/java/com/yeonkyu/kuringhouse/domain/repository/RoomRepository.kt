@@ -1,6 +1,7 @@
 package com.yeonkyu.kuringhouse.domain.repository
 
 import com.yeonkyu.kuringhouse.domain.model.Room
+import com.yeonkyu.kuringhouse.domain.util.Result
 
 interface RoomRepository {
     fun getRoomList(
@@ -29,9 +30,17 @@ interface RoomRepository {
         onError: (code: String, message: String) -> Unit
     )
 
-    fun muteMic(roomId: String)
+    fun muteMic(
+        roomId: String,
+        onSuccess: () -> Unit,
+        onError: (message: String) -> Unit
+    )
 
-    fun unMuteMic(roomId: String)
+    fun unMuteMic(
+        roomId: String,
+        onSuccess: () -> Unit,
+        onError: (message: String) -> Unit
+    )
 
-    suspend fun exitRoom(roomId: String)
+    suspend fun exitRoom(roomId: String): Result<Unit>
 }

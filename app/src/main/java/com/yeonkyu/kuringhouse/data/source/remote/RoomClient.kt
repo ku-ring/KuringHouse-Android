@@ -2,6 +2,9 @@ package com.yeonkyu.kuringhouse.data.source.remote
 
 import com.sendbird.calls.*
 import com.sendbird.calls.handler.RoomListQueryResultHandler
+import com.yeonkyu.kuringhouse.domain.util.Result
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -96,32 +99,56 @@ class RoomClient @Inject constructor(
         }
     }
 
-    fun muteMic(roomId: String) {
+    fun muteMic(
+        roomId: String,
+        onSuccess: () -> Unit,
+        onError: (message: String) -> Unit
+    ) {
         call.getCachedRoomById(roomId)?.run {
-            // todo : re-implement - remove '!!'
-            this.localParticipant!!.muteMicrophone()
-            Timber.e("mute")
-        }
+            this.localParticipant?.let {
+                it.muteMicrophone()
+                onSuccess()
+            } ?: onError("getLocalParticipant fail")
+        } ?: onError("getCachedRoomById fail")
     }
 
-    fun unMuteMic(roomId: String) {
+    fun unMuteMic(
+        roomId: String,
+        onSuccess: () -> Unit,
+        onError: (message: String) -> Unit
+    ) {
         call.getCachedRoomById(roomId)?.run {
-            this.localParticipant!!.unmuteMicrophone()
-            Timber.e("unMute")
-        }
+            this.localParticipant?.let {
+                it.unmuteMicrophone()
+                onSuccess()
+            } ?: onError("getLocalParticipant fail")
+        } ?: onError("getCachedRoomById fail")
     }
 
-    suspend fun exitRoom(roomId: String) {
+    suspend fun exitRoom(roomId: String): Result<Unit> = withContext(Dispatchers.IO) {
         call.getCachedRoomById(roomId)?.run {
             this.exit()
             if (this.participants.isEmpty()) {
-                try {
-                    apiService.deleteRoom(roomId)
-                } catch (e: Exception) {
-                    Timber.e("delete room error : $e")
-                }
+                deleteRoom(this.roomId)
+            } else {
+                Timber.e("room exited")
+                Result.Success(Unit)
             }
-            Timber.e("room exited")
+        } ?: Result.Error(Exception("getCachedRoomById() fail"))
+    }
+
+    private suspend fun deleteRoom(roomId: String): Result<Unit> = withContext(Dispatchers.IO) {
+        try {
+            val response = apiService.deleteRoom(roomId)
+            if (response.isSuccessful) {
+                Timber.e("room exited")
+                return@withContext Result.Success(Unit)
+            } else {
+                return@withContext Result.Error(Exception("delete room fail : ${response.message()}"))
+            }
+        } catch (e: Exception) {
+            Timber.e("delete room error : $e")
+            return@withContext Result.Error(e)
         }
     }
 }

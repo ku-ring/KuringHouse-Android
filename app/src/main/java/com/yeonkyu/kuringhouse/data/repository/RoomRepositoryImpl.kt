@@ -7,6 +7,7 @@ import com.yeonkyu.kuringhouse.data.mapper.toRoomList
 import com.yeonkyu.kuringhouse.data.source.remote.RoomClient
 import com.yeonkyu.kuringhouse.domain.model.Room
 import com.yeonkyu.kuringhouse.domain.repository.RoomRepository
+import com.yeonkyu.kuringhouse.domain.util.Result
 import com.yeonkyu.kuringhouse.domain.util.roomName
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -90,15 +91,25 @@ class RoomRepositoryImpl(
             })
     }
 
-    override fun muteMic(roomId: String) {
-        roomClient.muteMic(roomId)
+    override fun muteMic(
+        roomId: String,
+        onSuccess: () -> Unit,
+        onError: (message: String) -> Unit
+    ) {
+        roomClient.muteMic(roomId, onSuccess, onError)
     }
 
-    override fun unMuteMic(roomId: String) {
-        roomClient.unMuteMic(roomId)
+    override fun unMuteMic(
+        roomId: String,
+        onSuccess: () -> Unit,
+        onError: (message: String) -> Unit
+    ) {
+        roomClient.unMuteMic(roomId, onSuccess, onError)
     }
 
-    override suspend fun exitRoom(roomId: String) {
+    override suspend fun exitRoom(
+        roomId: String,
+    ): Result<Unit> {
         return withContext(Dispatchers.IO) {
             roomClient.exitRoom(roomId)
         }
