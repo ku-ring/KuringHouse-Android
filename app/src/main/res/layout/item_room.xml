@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="roomInfo"
             type="com.yeonkyu.kuringhouse.domain.model.Room" />
@@ -22,9 +23,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:fontFamily="@font/notosanskr_bold"
+            android:text="@{roomInfo.title}"
             android:textColor="@color/black"
             android:textSize="16sp"
-            android:text="@{roomInfo.title}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="쿠링하우스 로비" />
@@ -35,10 +36,9 @@
             android:layout_height="24dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
-            android:src="@drawable/ic_person"
+            android:src="@drawable/ic_person24"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/room_title"
-            app:tint="@color/kus_gray" />
+            app:layout_constraintTop_toBottomOf="@+id/room_title" />
 
         <TextView
             android:id="@+id/room_people_count_tv"
@@ -46,9 +46,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:fontFamily="@font/notosanskr_regular"
+            android:text="@{Integer.toString(roomInfo.participants.size())}"
             android:textColor="@color/kus_gray"
             android:textSize="12sp"
-            android:text="@{Integer.toString(roomInfo.participants.size())}"
             app:layout_constraintBottom_toBottomOf="@id/room_people_iv"
             app:layout_constraintStart_toEndOf="@+id/room_people_iv"
             app:layout_constraintTop_toTopOf="@+id/room_people_iv"
