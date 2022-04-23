@@ -3,11 +3,8 @@ package com.yeonkyu.kuringhouse.data.source.remote
 import com.sendbird.calls.AuthenticateParams
 import com.sendbird.calls.SendBirdCall
 import com.yeonkyu.kuringhouse.domain.model.User
-import javax.inject.Inject
 
-class AuthClient @Inject constructor(
-    private val call: SendBirdCall
-) {
+class AuthClient {
     fun authenticate(
         user: User,
         onSuccess: () -> Unit,
@@ -16,7 +13,7 @@ class AuthClient @Inject constructor(
         val params = AuthenticateParams(userId = user.id)
             .setAccessToken(accessToken = user.accessToken)
 
-        call.authenticate(params = params) { _, e ->
+        SendBirdCall.authenticate(params = params) { _, e ->
             if (e == null) {
                 onSuccess()
             } else {

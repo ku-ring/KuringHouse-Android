@@ -9,7 +9,6 @@ import timber.log.Timber
 import javax.inject.Inject
 
 class RoomClient @Inject constructor(
-    private val call: SendBirdCall,
     private val apiService: ApiService
 ) {
 
@@ -18,7 +17,7 @@ class RoomClient @Inject constructor(
         .setLimit(10)
         .setState(RoomState.OPEN)
 
-    private var query = call.createRoomListQuery(params)
+    private var query = SendBirdCall.createRoomListQuery(params)
 
     fun retrieveRoomList(
         onSuccess: (List<Room>) -> Unit,
@@ -41,7 +40,7 @@ class RoomClient @Inject constructor(
     }
 
     fun refreshRoomList() {
-        query = call.createRoomListQuery(params)
+        query = SendBirdCall.createRoomListQuery(params)
     }
 
     fun createRoom(
@@ -49,7 +48,7 @@ class RoomClient @Inject constructor(
         onSuccess: (room: Room) -> Unit,
         onError: (code: String, message: String) -> Unit
     ) {
-        call.createRoom(params) { room, e ->
+        SendBirdCall.createRoom(params) { room, e ->
             if (room == null || e != null) {
                 onError(e?.code.toString(), e?.message ?: "")
             } else {
@@ -63,7 +62,7 @@ class RoomClient @Inject constructor(
         onSuccess: (room: Room) -> Unit,
         onError: (code: String, message: String) -> Unit
     ) {
-        call.fetchRoomById(roomId) { room, e ->
+        SendBirdCall.fetchRoomById(roomId) { room, e ->
             if (room == null || e != null) {
                 onError(e?.code.toString(), e?.message ?: "")
             } else {
@@ -77,9 +76,9 @@ class RoomClient @Inject constructor(
         onSuccess: () -> Unit,
         onError: (code: String, message: String) -> Unit
     ) {
-        call.getCachedRoomById(roomId)?.run {
+        SendBirdCall.getCachedRoomById(roomId)?.run {
             for (participant in participants) {
-                if (participant.user.userId == call.currentUser?.userId) {
+                if (participant.user.userId == SendBirdCall.currentUser?.userId) {
                     onSuccess()
                     return@run
                 }
@@ -104,7 +103,7 @@ class RoomClient @Inject constructor(
         onSuccess: () -> Unit,
         onError: (message: String) -> Unit
     ) {
-        call.getCachedRoomById(roomId)?.run {
+        SendBirdCall.getCachedRoomById(roomId)?.run {
             this.localParticipant?.let {
                 it.muteMicrophone()
                 onSuccess()
@@ -117,7 +116,7 @@ class RoomClient @Inject constructor(
         onSuccess: () -> Unit,
         onError: (message: String) -> Unit
     ) {
-        call.getCachedRoomById(roomId)?.run {
+        SendBirdCall.getCachedRoomById(roomId)?.run {
             this.localParticipant?.let {
                 it.unmuteMicrophone()
                 onSuccess()
@@ -126,7 +125,7 @@ class RoomClient @Inject constructor(
     }
 
     suspend fun exitRoom(roomId: String): Result<Unit> = withContext(Dispatchers.IO) {
-        call.getCachedRoomById(roomId)?.run {
+        SendBirdCall.getCachedRoomById(roomId)?.run {
             this.exit()
             if (this.participants.isEmpty()) {
                 deleteRoom(this.roomId)

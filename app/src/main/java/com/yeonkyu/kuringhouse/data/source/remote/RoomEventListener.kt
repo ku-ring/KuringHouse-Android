@@ -7,22 +7,18 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import javax.inject.Inject
 
-class RoomEventListener @Inject constructor(
-    private val call: SendBirdCall,
-) : RoomListener {
-
+class RoomEventListener : RoomListener {
     private val _updateEvent = MutableSharedFlow<Unit>(replay = 0, extraBufferCapacity = 1)
     val updateEvent: SharedFlow<Unit>
         get() = _updateEvent
 
     fun addListener(tag: String, roomId: String) {
-        call.getCachedRoomById(roomId)?.addListener(tag, this)
+        SendBirdCall.getCachedRoomById(roomId)?.addListener(tag, this)
     }
 
     fun removeListener(tag: String, roomId: String) {
-        call.getCachedRoomById(roomId)?.removeListener(tag)
+        SendBirdCall.getCachedRoomById(roomId)?.removeListener(tag)
     }
 
     override fun onCustomItemsDeleted(deletedKeys: List<String>) {

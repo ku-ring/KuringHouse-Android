@@ -24,22 +24,20 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideAuthClient(call: SendBirdCall): AuthClient {
-        return AuthClient(call)
+    fun provideAuthClient(): AuthClient {
+        return AuthClient()
     }
 
     @Provides
     @Singleton
-    fun provideRoomClient(call: SendBirdCall, apiService: ApiService): RoomClient {
-        return RoomClient(call, apiService)
+    fun provideRoomClient(apiService: ApiService): RoomClient {
+        return RoomClient(apiService)
     }
 
     @Provides
     @Singleton
-    fun provideRoomListenerImpl(
-        call: SendBirdCall
-    ) : RoomEventListener {
-        return RoomEventListener(call)
+    fun provideRoomListenerImpl() : RoomEventListener {
+        return RoomEventListener()
     }
 
     @Provides
