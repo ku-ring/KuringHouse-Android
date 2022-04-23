@@ -5,14 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.yeonkyu.kuringhouse.R
+import com.yeonkyu.kuringhouse.data.repository.RoomListenerRepositoryImpl
 import com.yeonkyu.kuringhouse.domain.model.Member
-import com.yeonkyu.kuringhouse.domain.usecase.room.EnterRoomUseCase
-import com.yeonkyu.kuringhouse.domain.usecase.room.GetRoomInfoUseCase
-import com.yeonkyu.kuringhouse.domain.usecase.room.LeaveRoomUseCase
-import com.yeonkyu.kuringhouse.domain.usecase.room.SwitchMicUseCase
+import com.yeonkyu.kuringhouse.domain.usecase.room.*
 import com.yeonkyu.kuringhouse.domain.util.succeeded
 import com.yeonkyu.kuringhouse.presentation.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
@@ -22,7 +22,10 @@ class RoomViewModel @Inject constructor(
     private val getRoomInfoUseCase: GetRoomInfoUseCase,
     private val enterRoomInfoUseCase: EnterRoomUseCase,
     private val switchMicUseCase: SwitchMicUseCase,
-    private val leaveRoomUseCase: LeaveRoomUseCase
+    private val leaveRoomUseCase: LeaveRoomUseCase,
+    private val addRoomListenerUseCase: AddRoomListenerUseCase,
+    private val removeRoomListenerUseCase: RemoveRoomListenerUseCase,
+    private val observeRoomEventUseCase: ObserveRoomEventUseCase
 ) : ViewModel() {
 
     lateinit var roomId: String
@@ -61,10 +64,20 @@ class RoomViewModel @Inject constructor(
             onSuccess = {
                 Timber.e("enterRoom success")
                 getRoomInfo(roomId)
+                observeRoomEvent()
             }, onError = { code, message ->
                 Timber.e("enterRoom error [$code] : $message")
                 _dialogEvent.postValue(R.string.enter_room_fail)
             })
+    }
+
+    private fun observeRoomEvent() {
+        addRoomListenerUseCase.execute(TAG, roomId)
+
+        viewModelScope.launch(Dispatchers.IO) {
+            observeRoomEventUseCase.execute()
+                .collect { getRoomInfo(roomId) }
+        }
     }
 
     private fun getRoomInfo(roomId: String) {
@@ -112,5 +125,14 @@ class RoomViewModel @Inject constructor(
                 _quitEvent.postValue(R.string.leave_room_fail)
             }
         }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        removeRoomListenerUseCase.execute(TAG, roomId)
+    }
+
+    companion object {
+        val TAG: String = RoomViewModel::class.java.simpleName
     }
 }

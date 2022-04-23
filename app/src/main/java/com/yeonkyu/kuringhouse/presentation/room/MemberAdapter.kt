@@ -42,6 +42,7 @@ class MemberAdapter : ListAdapter<Member, MemberAdapter.MemberViewHolder>(
         override fun areContentsTheSame(oldItem: Member, newItem: Member): Boolean {
             return oldItem.id == newItem.id
                     && oldItem.nickname == newItem.nickname
+                    && oldItem.profile == newItem.profile
                     && oldItem.canSpeak == newItem.canSpeak
         }
     }

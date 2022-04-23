@@ -5,6 +5,7 @@ import com.yeonkyu.kuringhouse.BuildConfig
 import com.yeonkyu.kuringhouse.data.source.remote.AuthClient
 import com.yeonkyu.kuringhouse.data.source.remote.ApiService
 import com.yeonkyu.kuringhouse.data.source.remote.RoomClient
+import com.yeonkyu.kuringhouse.data.source.remote.RoomEventListener
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -31,6 +32,14 @@ object NetworkModule {
     @Singleton
     fun provideRoomClient(call: SendBirdCall, apiService: ApiService): RoomClient {
         return RoomClient(call, apiService)
+    }
+
+    @Provides
+    @Singleton
+    fun provideRoomListenerImpl(
+        call: SendBirdCall
+    ) : RoomEventListener {
+        return RoomEventListener(call)
     }
 
     @Provides
