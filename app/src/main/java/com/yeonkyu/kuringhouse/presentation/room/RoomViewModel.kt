@@ -40,11 +40,11 @@ class RoomViewModel @Inject constructor(
         get() = _isMicOn
 
     private val _dialogEvent = SingleLiveEvent<Int>()
-    val dialogEvent: SingleLiveEvent<Int>
+    val dialogEvent: LiveData<Int>
         get() = _dialogEvent
 
     private val _quitEvent = SingleLiveEvent<Int?>()
-    val quitEvent: SingleLiveEvent<Int?>
+    val quitEvent: LiveData<Int?>
         get() = _quitEvent
 
     fun getRoom(roomId: String) {

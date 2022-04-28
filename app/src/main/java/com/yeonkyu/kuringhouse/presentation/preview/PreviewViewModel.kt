@@ -1,5 +1,6 @@
 package com.yeonkyu.kuringhouse.presentation.preview
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.yeonkyu.kuringhouse.R
@@ -20,17 +21,27 @@ class PreviewViewModel @Inject constructor(
     val isLoading = MutableLiveData(false)
     val isEnd = MutableLiveData(false)
 
-    val dialogEvent = SingleLiveEvent<Int>()
-    val dismissBottomSheetEvent = SingleLiveEvent<Unit>()
-    val createdRoomEvent= SingleLiveEvent<Room>()
+    private val _roomList = MutableLiveData<List<Room>>()
+    val roomList: LiveData<List<Room>>
+        get() = _roomList
 
-    val roomList = MutableLiveData<List<Room>>()
+    private val _dialogEvent = SingleLiveEvent<Int>()
+    val dialogEvent: LiveData<Int>
+        get() = _dialogEvent
+
+    private val _dismissBottomSheetEvent = SingleLiveEvent<Unit>()
+    val dismissBottomSheetEvent: LiveData<Unit>
+        get() = _dismissBottomSheetEvent
+
+    private val _createdRoomEvent = SingleLiveEvent<Room>()
+    val createdRoomEvent: LiveData<Room>
+        get() = _createdRoomEvent
 
     fun fetchRoomList() {
         isLoading.postValue(true)
         getRoomListUseCase.execute(
             onSuccess = {
-                roomList.postValue(it)
+                _roomList.postValue(it)
                 isLoading.postValue(false)
             }, onError = { code, message ->
                 Timber.e("getRoomList error [$code] : $message")
@@ -50,12 +61,12 @@ class PreviewViewModel @Inject constructor(
         createRoomUseCase.execute(
             title = title,
             onSuccess = {
-                dismissBottomSheetEvent.call()
-                createdRoomEvent.postValue(it)
+                _dismissBottomSheetEvent.call()
+                _createdRoomEvent.postValue(it)
             }, onError = { code, message ->
                 Timber.e("createRoomList error [$code] : $message")
-                dialogEvent.postValue(R.string.create_room_fail)
-                dismissBottomSheetEvent.call()
+                _dialogEvent.postValue(R.string.create_room_fail)
+                _dismissBottomSheetEvent.call()
             }
         )
     }

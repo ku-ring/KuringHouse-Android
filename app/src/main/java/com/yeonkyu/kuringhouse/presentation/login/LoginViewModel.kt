@@ -1,5 +1,6 @@
 package com.yeonkyu.kuringhouse.presentation.login
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.yeonkyu.kuringhouse.domain.model.User
@@ -21,8 +22,13 @@ class LoginViewModel @Inject constructor(
     val email = MutableLiveData<String>()
     val accessToken = MutableLiveData<String>()
 
-    val authSuccess = SingleLiveEvent<Unit>()
-    val dialogEvent = SingleLiveEvent<Pair<String, String?>>()
+    private val _authSuccess = SingleLiveEvent<Unit>()
+    val authSuccess: LiveData<Unit>
+        get() = _authSuccess
+
+    private val _dialogEvent = SingleLiveEvent<Pair<String, String?>>()
+    val dialogEvent: LiveData<Pair<String, String?>>
+        get() = _dialogEvent
 
     init {
         getUser()
@@ -46,11 +52,11 @@ class LoginViewModel @Inject constructor(
         val accessToken = accessToken.value?.trim() ?: ""
 
         if (email.isEmpty()) {
-            dialogEvent.postValue(Pair("이메일을 입력해주세요.", null))
+            _dialogEvent.postValue(Pair("이메일을 입력해주세요.", null))
             return
         }
         if (accessToken.isEmpty()) {
-            dialogEvent.postValue(Pair("초대 코드를 입력해주세요.", null))
+            _dialogEvent.postValue(Pair("초대 코드를 입력해주세요.", null))
             return
         }
 
@@ -59,11 +65,11 @@ class LoginViewModel @Inject constructor(
             onSuccess = {
                 Timber.e("SB auth success")
                 saveUser(email, accessToken)
-                authSuccess.call()
+                _authSuccess.call()
             },
             onError = { code, message ->
                 Timber.e("SB auth fail : [$code] $message")
-                dialogEvent.postValue(Pair("로그인 실패", message))
+                _dialogEvent.postValue(Pair("로그인 실패", message))
             }
         )
     }
