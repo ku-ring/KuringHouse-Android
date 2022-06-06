@@ -9,3 +9,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "KuringHouse"
 include ':app'
+include ':data'
