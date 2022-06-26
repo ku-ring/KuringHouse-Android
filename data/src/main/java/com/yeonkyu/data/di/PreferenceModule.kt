@@ -1,7 +1,7 @@
 package com.yeonkyu.data.di
 
 import android.content.Context
-import com.yeonkyu.kuringhouse.data.source.local.PreferenceManager
+import com.yeonkyu.data.source.local.PreferenceManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

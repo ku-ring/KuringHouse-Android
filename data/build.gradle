@@ -5,6 +5,8 @@ plugins {
     id 'dagger.hilt.android.plugin'
 }
 
+def localPropertiesFile = rootProject.file("local.properties")
+
 android {
     compileSdk compile_sdk_version
 
@@ -14,6 +16,12 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
+
+        def localProperties = new Properties()
+        localProperties.load(new FileInputStream(localPropertiesFile))
+
+        buildConfigField "String", "SENDBIRD_APP_ID", localProperties['SENDBIRD_APP_ID']
+        buildConfigField "String", "SENDBIRD_API_TOKEN", localProperties['SENDBIRD_API_TOKEN']
     }
 
     buildTypes {
@@ -32,7 +40,6 @@ android {
 }
 
 dependencies {
-    implementation project(path: ':app')
     implementation project(path: ':domain')
 
     implementation "androidx.core:core-ktx:$android_core_ktx_version"
@@ -40,6 +47,8 @@ dependencies {
     implementation "com.google.android.material:material:$android_material_version"
 
     testImplementation "junit:junit:$junit_version"
+
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$android_core_ktx_version"
 
     // retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"

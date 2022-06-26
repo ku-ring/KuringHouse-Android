@@ -1,17 +1,16 @@
-package com.yeonkyu.kuringhouse.data.mapper
+package com.yeonkyu.data.mapper
 
 import com.sendbird.calls.Participant
 import com.sendbird.calls.RemoteParticipant
-import com.sendbird.calls.Room
-import com.yeonkyu.kuringhouse.data.model.RoomResponse
-import com.yeonkyu.kuringhouse.domain.model.Member
-import com.yeonkyu.kuringhouse.domain.util.roomName
+import com.yeonkyu.data.model.RoomResponse
+import com.yeonkyu.domain.model.Member
+import com.yeonkyu.domain.util.roomName
 
-fun List<Room>.toRoomList() = this.map {
+fun List<com.sendbird.calls.Room>.toRoomList() = this.map {
     it.toRoom()
 }
 
-fun Room.toRoom() = com.yeonkyu.kuringhouse.domain.model.Room(
+fun com.sendbird.calls.Room.toRoom() = com.yeonkyu.domain.model.Room(
     id = this.roomId,
     title = this.customItems[roomName] ?: "",
     participants = this.participants.map { it.toMember() }
@@ -31,7 +30,7 @@ fun Participant.toMember() = Member(
     }
 )
 
-fun RoomResponse.toRoom() = com.yeonkyu.kuringhouse.domain.model.Room(
+fun RoomResponse.toRoom() = com.yeonkyu.domain.model.Room(
     id = this.room.roomId,
     title = "",
     participants = emptyList()

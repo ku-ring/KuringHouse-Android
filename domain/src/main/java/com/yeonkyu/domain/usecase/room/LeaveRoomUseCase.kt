@@ -1,7 +1,7 @@
-package com.yeonkyu.kuringhouse.domain.usecase.room
+package com.yeonkyu.domain.usecase.room
 
-import com.yeonkyu.kuringhouse.domain.repository.RoomRepository
-import com.yeonkyu.kuringhouse.domain.util.Result
+import com.yeonkyu.domain.repository.RoomRepository
+import com.yeonkyu.domain.util.Result
 import javax.inject.Inject
 
 class LeaveRoomUseCase @Inject constructor(

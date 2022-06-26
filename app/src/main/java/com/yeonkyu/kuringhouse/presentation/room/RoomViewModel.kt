@@ -5,9 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.yeonkyu.kuringhouse.R
-import com.yeonkyu.kuringhouse.domain.model.Member
-import com.yeonkyu.kuringhouse.domain.usecase.room.*
-import com.yeonkyu.kuringhouse.domain.util.succeeded
+import com.yeonkyu.domain.model.Member
+import com.yeonkyu.domain.usecase.room.*
+import com.yeonkyu.domain.util.succeeded
 import com.yeonkyu.kuringhouse.presentation.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers

@@ -1,4 +1,4 @@
-package com.yeonkyu.kuringhouse.data.source.local
+package com.yeonkyu.data.source.local
 
 import android.content.Context
 import android.content.SharedPreferences

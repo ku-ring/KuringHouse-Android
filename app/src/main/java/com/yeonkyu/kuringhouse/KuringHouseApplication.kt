@@ -15,6 +15,6 @@ class KuringHouseApplication : Application() {
             Timber.plant(Timber.DebugTree())
         }
 
-        SendBirdCall.init(applicationContext, BuildConfig.SENDBIRD_APP_ID)
+        SendBirdCall.init(applicationContext, com.yeonkyu.data.BuildConfig.SENDBIRD_APP_ID)
     }
 }

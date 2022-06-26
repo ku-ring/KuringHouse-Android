@@ -1,11 +1,10 @@
 package com.yeonkyu.data.di
 
-import com.sendbird.calls.SendBirdCall
-import com.yeonkyu.kuringhouse.BuildConfig
-import com.yeonkyu.kuringhouse.data.source.remote.AuthClient
-import com.yeonkyu.kuringhouse.data.source.remote.ApiService
-import com.yeonkyu.kuringhouse.data.source.remote.RoomClient
-import com.yeonkyu.kuringhouse.data.source.remote.RoomEventListener
+import com.yeonkyu.data.BuildConfig
+import com.yeonkyu.data.source.remote.AuthClient
+import com.yeonkyu.data.source.remote.ApiService
+import com.yeonkyu.data.source.remote.RoomClient
+import com.yeonkyu.data.source.remote.RoomEventListener
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -1,4 +1,4 @@
-package com.yeonkyu.kuringhouse.domain.repository
+package com.yeonkyu.domain.repository
 
 import kotlinx.coroutines.flow.Flow
 

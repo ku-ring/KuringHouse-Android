@@ -1,7 +1,7 @@
-package com.yeonkyu.kuringhouse.domain.repository
+package com.yeonkyu.domain.repository
 
-import com.yeonkyu.kuringhouse.domain.model.Room
-import com.yeonkyu.kuringhouse.domain.util.Result
+import com.yeonkyu.domain.model.Room
+import com.yeonkyu.domain.util.Result
 
 interface RoomRepository {
     fun getRoomList(

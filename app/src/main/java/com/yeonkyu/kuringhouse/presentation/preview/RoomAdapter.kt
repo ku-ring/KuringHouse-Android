@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.yeonkyu.kuringhouse.R
 import com.yeonkyu.kuringhouse.databinding.ItemRoomBinding
-import com.yeonkyu.kuringhouse.domain.model.Room
+import com.yeonkyu.domain.model.Room
 
 class RoomAdapter constructor(
     private val itemClick: (Room) -> Unit
@@ -39,6 +39,7 @@ class RoomAdapter constructor(
         }
 
         fun bind(room: Room) {
+            binding.roomInfo
             binding.roomInfo = room
         }
     }

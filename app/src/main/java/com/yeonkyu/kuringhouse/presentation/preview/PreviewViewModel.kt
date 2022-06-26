@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.yeonkyu.kuringhouse.R
-import com.yeonkyu.kuringhouse.domain.model.Room
-import com.yeonkyu.kuringhouse.domain.usecase.room.CreateRoomUseCase
-import com.yeonkyu.kuringhouse.domain.usecase.room.GetRoomListUseCase
+import com.yeonkyu.domain.model.Room
+import com.yeonkyu.domain.usecase.room.CreateRoomUseCase
+import com.yeonkyu.domain.usecase.room.GetRoomListUseCase
 import com.yeonkyu.kuringhouse.presentation.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import timber.log.Timber

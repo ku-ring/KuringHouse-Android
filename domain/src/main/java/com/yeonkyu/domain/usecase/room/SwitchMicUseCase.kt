@@ -1,6 +1,6 @@
-package com.yeonkyu.kuringhouse.domain.usecase.room
+package com.yeonkyu.domain.usecase.room
 
-import com.yeonkyu.kuringhouse.domain.repository.RoomRepository
+import com.yeonkyu.domain.repository.RoomRepository
 import javax.inject.Inject
 
 class SwitchMicUseCase @Inject constructor(

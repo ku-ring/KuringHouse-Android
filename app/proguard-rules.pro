@@ -20,7 +20,8 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
--keep class com.yeonkyu.kuringhouse.data.model.** { *; }
+#-keep class com.yeonkyu.kuringhouse.model.** { *; }
+-keep class com.yeonkyu.data.model.** {*; }
 
 # Sendbird Calls SDK
 -keep class com.sendbird.calls.** { *; }

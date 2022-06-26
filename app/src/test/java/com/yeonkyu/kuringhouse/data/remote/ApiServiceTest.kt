@@ -1,6 +1,6 @@
 package com.yeonkyu.kuringhouse.data.remote
 
-import com.yeonkyu.kuringhouse.data.source.remote.ApiService
+import com.yeonkyu.data.source.remote.ApiService
 import kotlinx.coroutines.runBlocking
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer

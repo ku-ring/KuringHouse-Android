@@ -1,4 +1,4 @@
-package com.yeonkyu.kuringhouse.domain.model
+package com.yeonkyu.domain.model
 
 data class Member(
     val id: String,

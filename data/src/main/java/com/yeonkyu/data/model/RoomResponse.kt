@@ -1,4 +1,4 @@
-package com.yeonkyu.kuringhouse.data.model
+package com.yeonkyu.data.model
 
 import com.google.gson.annotations.SerializedName
 

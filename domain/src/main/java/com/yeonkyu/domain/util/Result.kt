@@ -1,4 +1,4 @@
-package com.yeonkyu.kuringhouse.domain.util
+package com.yeonkyu.domain.util
 
 /*
  * Copyright (C) 2019 The Android Open Source Project

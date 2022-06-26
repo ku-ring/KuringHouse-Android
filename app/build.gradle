@@ -5,8 +5,6 @@ plugins {
     id 'dagger.hilt.android.plugin'
 }
 
-def localPropertiesFile = rootProject.file("local.properties")
-
 android {
     compileSdk compile_sdk_version
 
@@ -16,12 +14,6 @@ android {
         targetSdk target_sdk_version
         versionCode 2
         versionName "1.0.1"
-
-        def localProperties = new Properties()
-        localProperties.load(new FileInputStream(localPropertiesFile))
-
-        buildConfigField "String", "SENDBIRD_APP_ID", localProperties['SENDBIRD_APP_ID']
-        buildConfigField "String", "SENDBIRD_API_TOKEN", localProperties['SENDBIRD_API_TOKEN']
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -55,6 +47,7 @@ android {
 
 dependencies {
     implementation project(path: ':domain')
+    implementation project(path: ':data')
 
     implementation "androidx.core:core-ktx:$android_core_ktx_version"
     implementation "androidx.appcompat:appcompat:$android_appcompat_version"
@@ -70,6 +63,15 @@ dependencies {
     kaptAndroidTest "com.google.dagger:hilt-compiler:$hilt_version"
     testImplementation "com.google.dagger:hilt-android-testing:$hilt_version"
     kaptTest "com.google.dagger:hilt-compiler:$hilt_version"
+
+    // retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+
+    // okHttp
+    implementation "com.squareup.okhttp3:okhttp:$okHttp_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okHttp_version"
+    testImplementation "com.squareup.okhttp3:mockwebserver:$okHttp_version"
 
     // Timber
     implementation 'com.jakewharton.timber:timber:4.7.1'
@@ -91,5 +93,9 @@ dependencies {
 
     // glide
     implementation "com.github.bumptech.glide:glide:$glide_version"
-    annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
+    //annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
+    kapt "com.github.bumptech.glide:compiler:$glide_version"
+
+    // sendbird sdk
+    implementation 'com.sendbird.sdk:sendbird-calls:1.8.0'
 }

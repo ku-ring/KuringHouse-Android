@@ -7,7 +7,7 @@
 
         <variable
             name="member"
-            type="com.yeonkyu.kuringhouse.domain.model.Member" />
+            type="com.yeonkyu.domain.model.Member" />
 
     </data>
 

@@ -1,6 +1,6 @@
-package com.yeonkyu.kuringhouse.data.source.remote
+package com.yeonkyu.data.source.remote
 
-import com.yeonkyu.kuringhouse.data.model.RoomResponse
+import com.yeonkyu.data.model.RoomResponse
 import retrofit2.Response
 import retrofit2.http.DELETE
 import retrofit2.http.Path

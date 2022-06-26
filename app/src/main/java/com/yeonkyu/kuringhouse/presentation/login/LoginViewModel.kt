@@ -3,10 +3,10 @@ package com.yeonkyu.kuringhouse.presentation.login
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.yeonkyu.kuringhouse.domain.model.User
-import com.yeonkyu.kuringhouse.domain.usecase.auth.AuthorizeUseCase
-import com.yeonkyu.kuringhouse.domain.usecase.auth.GetUserUseCase
-import com.yeonkyu.kuringhouse.domain.usecase.auth.UpdateUserUseCase
+import com.yeonkyu.domain.model.User
+import com.yeonkyu.domain.usecase.auth.AuthorizeUseCase
+import com.yeonkyu.domain.usecase.auth.GetUserUseCase
+import com.yeonkyu.domain.usecase.auth.UpdateUserUseCase
 import com.yeonkyu.kuringhouse.presentation.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import timber.log.Timber

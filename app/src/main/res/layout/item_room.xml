@@ -7,7 +7,7 @@
 
         <variable
             name="roomInfo"
-            type="com.yeonkyu.kuringhouse.domain.model.Room" />
+            type="com.yeonkyu.domain.model.Room" />
 
     </data>
 

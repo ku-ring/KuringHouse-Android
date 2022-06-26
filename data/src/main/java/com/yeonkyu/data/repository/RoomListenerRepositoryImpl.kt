@@ -1,7 +1,7 @@
-package com.yeonkyu.kuringhouse.data.repository
+package com.yeonkyu.data.repository
 
-import com.yeonkyu.kuringhouse.data.source.remote.RoomEventListener
-import com.yeonkyu.kuringhouse.domain.repository.RoomListenerRepository
+import com.yeonkyu.data.source.remote.RoomEventListener
+import com.yeonkyu.domain.repository.RoomListenerRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

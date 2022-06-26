@@ -1,18 +1,19 @@
-package com.yeonkyu.kuringhouse.data.repository
+package com.yeonkyu.data.repository
 
 import com.sendbird.calls.RoomParams
 import com.sendbird.calls.RoomType
-import com.yeonkyu.kuringhouse.data.mapper.toRoom
-import com.yeonkyu.kuringhouse.data.mapper.toRoomList
-import com.yeonkyu.kuringhouse.data.source.remote.RoomClient
-import com.yeonkyu.kuringhouse.domain.model.Room
-import com.yeonkyu.kuringhouse.domain.repository.RoomRepository
-import com.yeonkyu.kuringhouse.domain.util.Result
-import com.yeonkyu.kuringhouse.domain.util.roomName
+import com.yeonkyu.data.mapper.toRoom
+import com.yeonkyu.data.mapper.toRoomList
+import com.yeonkyu.data.source.remote.RoomClient
+import com.yeonkyu.domain.model.Room
+import com.yeonkyu.domain.repository.RoomRepository
+import com.yeonkyu.domain.util.Result
+import com.yeonkyu.domain.util.roomName
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class RoomRepositoryImpl(
+class RoomRepositoryImpl @Inject constructor(
     private val roomClient: RoomClient
 ) : RoomRepository {
 

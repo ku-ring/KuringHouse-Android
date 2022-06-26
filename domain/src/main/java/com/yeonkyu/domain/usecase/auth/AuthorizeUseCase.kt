@@ -1,7 +1,7 @@
-package com.yeonkyu.kuringhouse.domain.usecase.auth
+package com.yeonkyu.domain.usecase.auth
 
-import com.yeonkyu.kuringhouse.domain.model.User
-import com.yeonkyu.kuringhouse.domain.repository.LoginRepository
+import com.yeonkyu.domain.model.User
+import com.yeonkyu.domain.repository.LoginRepository
 import javax.inject.Inject
 
 class AuthorizeUseCase @Inject constructor(

@@ -1,11 +1,12 @@
-package com.yeonkyu.kuringhouse.data.repository
+package com.yeonkyu.data.repository
 
-import com.yeonkyu.kuringhouse.data.source.local.PreferenceManager
-import com.yeonkyu.kuringhouse.data.source.remote.AuthClient
-import com.yeonkyu.kuringhouse.domain.model.User
-import com.yeonkyu.kuringhouse.domain.repository.LoginRepository
+import com.yeonkyu.data.source.local.PreferenceManager
+import com.yeonkyu.data.source.remote.AuthClient
+import com.yeonkyu.domain.model.User
+import com.yeonkyu.domain.repository.LoginRepository
+import javax.inject.Inject
 
-class LoginRepositoryImpl(
+class LoginRepositoryImpl @Inject constructor(
     private val pref: PreferenceManager,
     private val authClient: AuthClient
 ) : LoginRepository {

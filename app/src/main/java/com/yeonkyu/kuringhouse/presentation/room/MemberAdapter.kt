@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.yeonkyu.kuringhouse.R
 import com.yeonkyu.kuringhouse.databinding.ItemMemberBinding
-import com.yeonkyu.kuringhouse.domain.model.Member
+import com.yeonkyu.domain.model.Member
 
 class MemberAdapter : ListAdapter<Member, MemberAdapter.MemberViewHolder>(
     MemberDiffCallback

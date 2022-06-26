@@ -1,6 +1,6 @@
-package com.yeonkyu.kuringhouse.domain.repository
+package com.yeonkyu.domain.repository
 
-import com.yeonkyu.kuringhouse.domain.model.User
+import com.yeonkyu.domain.model.User
 
 interface LoginRepository {
     fun getUser(): User

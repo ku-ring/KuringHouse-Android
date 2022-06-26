@@ -1,8 +1,8 @@
-package com.yeonkyu.kuringhouse.data.source.remote
+package com.yeonkyu.data.source.remote
 
 import com.sendbird.calls.*
 import com.sendbird.calls.handler.RoomListQueryResultHandler
-import com.yeonkyu.kuringhouse.domain.util.Result
+import com.yeonkyu.domain.util.Result
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import timber.log.Timber

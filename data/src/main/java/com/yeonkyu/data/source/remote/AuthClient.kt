@@ -1,8 +1,8 @@
-package com.yeonkyu.kuringhouse.data.source.remote
+package com.yeonkyu.data.source.remote
 
 import com.sendbird.calls.AuthenticateParams
 import com.sendbird.calls.SendBirdCall
-import com.yeonkyu.kuringhouse.domain.model.User
+import com.yeonkyu.domain.model.User
 
 class AuthClient {
     fun authenticate(

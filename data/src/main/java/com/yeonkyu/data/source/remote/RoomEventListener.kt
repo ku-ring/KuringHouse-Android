@@ -1,4 +1,4 @@
-package com.yeonkyu.kuringhouse.data.source.remote
+package com.yeonkyu.data.source.remote
 
 import com.sendbird.calls.*
 import kotlinx.coroutines.CoroutineScope
