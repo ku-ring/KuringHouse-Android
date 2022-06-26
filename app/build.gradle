@@ -61,7 +61,7 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:$android_constraintlayout_version"
     testImplementation "junit:junit:$junit_version"
 
-    // dagger hilt
+    // hilt
     kapt "androidx.hilt:hilt-compiler:1.0.0"
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-compiler:$hilt_version"
@@ -72,15 +72,6 @@ dependencies {
 
     // sendbird sdk
     implementation 'com.sendbird.sdk:sendbird-calls:1.8.0'
-
-    // retrofit
-    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
-    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
-
-    // okHttp
-    implementation "com.squareup.okhttp3:okhttp:$okHttp_version"
-    implementation "com.squareup.okhttp3:logging-interceptor:$okHttp_version"
-    testImplementation "com.squareup.okhttp3:mockwebserver:$okHttp_version"
 
     // Timber
     implementation 'com.jakewharton.timber:timber:4.7.1'
