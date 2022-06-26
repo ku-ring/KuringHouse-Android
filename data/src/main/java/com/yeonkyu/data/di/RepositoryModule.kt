@@ -1,4 +1,4 @@
-package com.yeonkyu.kuringhouse.di
+package com.yeonkyu.data.di
 
 import com.yeonkyu.kuringhouse.data.repository.LoginRepositoryImpl
 import com.yeonkyu.kuringhouse.data.repository.RoomListenerRepositoryImpl

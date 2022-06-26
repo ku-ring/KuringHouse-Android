@@ -1,6 +1,6 @@
 plugins {
     id 'com.android.library'
-    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
 }
@@ -32,10 +32,10 @@ android {
 }
 
 dependencies {
-
     implementation "androidx.core:core-ktx:$android_core_ktx_version"
     implementation "androidx.appcompat:appcompat:$android_appcompat_version"
     implementation "com.google.android.material:material:$android_material_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$android_core_ktx_version"
 
     testImplementation "junit:junit:$junit_version"
 
@@ -47,4 +47,7 @@ dependencies {
     kaptAndroidTest "com.google.dagger:hilt-compiler:$hilt_version"
     testImplementation "com.google.dagger:hilt-android-testing:$hilt_version"
     kaptTest "com.google.dagger:hilt-compiler:$hilt_version"
+
+    // timber
+    implementation 'com.jakewharton.timber:timber:4.7.1'
 }

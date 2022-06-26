@@ -32,11 +32,12 @@ android {
 }
 
 dependencies {
+    implementation project(path: ':app')
+    implementation project(path: ':domain')
 
     implementation "androidx.core:core-ktx:$android_core_ktx_version"
     implementation "androidx.appcompat:appcompat:$android_appcompat_version"
     implementation "com.google.android.material:material:$android_material_version"
-    implementation project(path: ':app')
 
     testImplementation "junit:junit:$junit_version"
 
@@ -60,4 +61,7 @@ dependencies {
     kaptAndroidTest "com.google.dagger:hilt-compiler:$hilt_version"
     testImplementation "com.google.dagger:hilt-android-testing:$hilt_version"
     kaptTest "com.google.dagger:hilt-compiler:$hilt_version"
+
+    // timber
+    implementation 'com.jakewharton.timber:timber:4.7.1'
 }

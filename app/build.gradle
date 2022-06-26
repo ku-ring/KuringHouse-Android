@@ -54,6 +54,7 @@ android {
 }
 
 dependencies {
+    implementation project(path: ':domain')
 
     implementation "androidx.core:core-ktx:$android_core_ktx_version"
     implementation "androidx.appcompat:appcompat:$android_appcompat_version"
@@ -69,9 +70,6 @@ dependencies {
     kaptAndroidTest "com.google.dagger:hilt-compiler:$hilt_version"
     testImplementation "com.google.dagger:hilt-android-testing:$hilt_version"
     kaptTest "com.google.dagger:hilt-compiler:$hilt_version"
-
-    // sendbird sdk
-    implementation 'com.sendbird.sdk:sendbird-calls:1.8.0'
 
     // Timber
     implementation 'com.jakewharton.timber:timber:4.7.1'

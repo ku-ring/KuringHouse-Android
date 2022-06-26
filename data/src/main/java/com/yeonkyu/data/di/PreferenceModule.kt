@@ -1,4 +1,4 @@
-package com.yeonkyu.kuringhouse.di
+package com.yeonkyu.data.di
 
 import android.content.Context
 import com.yeonkyu.kuringhouse.data.source.local.PreferenceManager
